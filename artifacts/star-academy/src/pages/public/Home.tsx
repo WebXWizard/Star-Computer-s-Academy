@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { CheckCircle2, MonitorPlay, GraduationCap, Award, Briefcase, MapPin, Phone, Mail, MessageSquareText, Star, BookOpen, Quote } from 'lucide-react';
+import { Monitor, Wifi, Printer, Clock, GraduationCap, Laptop, CheckCircle2, MapPin, Phone, Mail, Users, BookOpen, Quote, ChevronRight } from 'lucide-react';
 import { useListCourses, useListTestimonials, useCreateContact } from '@workspace/api-client-react';
 import { useToast } from '@/hooks/use-toast';
 import { useForm } from 'react-hook-form';
@@ -58,8 +58,25 @@ export default function Home() {
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
+  const facilities = [
+    { icon: <Monitor size={32} />, title: "Computer Lab", desc: "State-of-the-art computer lab with 1-to-1 PC ratio." },
+    { icon: <Wifi size={32} />, title: "High-Speed Internet", desc: "Seamless connectivity for research and practicals." },
+    { icon: <Printer size={32} />, title: "Printing Services", desc: "On-campus printing and scanning facilities." },
+    { icon: <Laptop size={32} />, title: "Tech Support", desc: "Dedicated support for software and hardware needs." },
+    { icon: <GraduationCap size={32} />, title: "Affordable Fees", desc: "Quality education that fits your budget." },
+    { icon: <Clock size={32} />, title: "Flexible Batches", desc: "Morning to evening batches to suit your schedule." }
+  ];
+
+  const defaultCourses = [
+    { title: "Basic Computer Course", desc: "Learn computer fundamentals, MS Paint, WordPad, and internet basics.", img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop" },
+    { title: "MS Word/Excel/PowerPoint", desc: "Master the complete Microsoft Office suite for professional office work.", img: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=600&h=400&fit=crop" },
+    { title: "Typing Classes (Hindi & English)", desc: "Improve typing speed and accuracy for data entry and clerical jobs.", img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&h=400&fit=crop" },
+    { title: "CCC Preparation", desc: "Comprehensive coaching for NIELIT Course on Computer Concepts.", img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" },
+    { title: "Internet & Email Training", desc: "Effective web browsing, emailing, and basic online safety.", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" }
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-background font-sans">
+    <div className="min-h-screen flex flex-col bg-slate-50 font-sans">
       <Navbar />
 
       {/* Floating WhatsApp Button */}
@@ -67,163 +84,115 @@ export default function Home() {
         href="https://wa.me/919876543210" 
         target="_blank" 
         rel="noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-xl hover:scale-110 hover:shadow-2xl transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 flex items-center justify-center"
       >
-        <MessageSquareText size={28} />
-        <span className="absolute right-full mr-4 bg-white text-foreground px-3 py-1.5 rounded-lg text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
-          Chat with us!
-        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.886-.59-.45-1.02-.1-1.14-.298-.065-.114-.065-.183-.166-.381-.099-.198-.05-.298.05-.396.098-.098.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.198.836.316 1.12.405.472.148.902.127 1.242.077.38-.056 1.17-.478 1.335-.94.165-.463.165-.86.115-.94-.05-.08-.182-.124-.38-.223z"/>
+        </svg>
       </a>
 
       {/* HERO SECTION */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center min-h-[90vh]">
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center bg-primary">
         <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-primary/90 mix-blend-multiply" />
           <img 
-            src={`${import.meta.env.BASE_URL}images/hero-abstract.png`} 
-            alt="Background" 
-            className="w-full h-full object-cover opacity-10"
+            src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&h=900&fit=crop" 
+            alt="Hero Background" 
+            className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-50/90 to-white/60 dark:from-background dark:to-background/80" />
         </div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div 
-              initial="hidden"
-              animate="show"
-              variants={staggerContainer}
-              className="max-w-2xl"
-            >
-              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary font-medium text-sm mb-6 border border-primary/20">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                </span>
-                Admissions Open for 2024
-              </motion.div>
-              <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl font-display font-extrabold text-foreground leading-[1.1] mb-6 tracking-tight">
-                Master Digital Skills & Become <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">Job Ready</span>
-              </motion.h1>
-              <motion.p variants={fadeUp} className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
-                Join Star Computer's Academy in Sarsaundi. Practical, hands-on computer education designed for beginners, students, and professionals aiming for career success.
-              </motion.p>
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-                <Button size="lg" className="rounded-full px-8 text-base h-14 shadow-lg shadow-primary/25 hover:shadow-xl hover:-translate-y-1 transition-all" onClick={() => window.scrollTo({top: document.getElementById('courses')?.offsetTop || 0, behavior: 'smooth'})}>
-                  Explore Courses
-                </Button>
-                <Button size="lg" variant="outline" className="rounded-full px-8 text-base h-14 bg-white/50 backdrop-blur-sm border-2 hover:bg-white transition-all" onClick={() => window.scrollTo({top: document.getElementById('contact')?.offsetTop || 0, behavior: 'smooth'})}>
-                  Contact Us
-                </Button>
-              </motion.div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
+          <motion.div 
+            initial="hidden"
+            animate="show"
+            variants={staggerContainer}
+            className="max-w-4xl mx-auto text-white"
+          >
+            <motion.h1 variants={fadeUp} className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6">
+              Welcome to <br className="hidden md:block" />
+              <span className="text-secondary">Star Computer's Academy</span>
+            </motion.h1>
+            <motion.p variants={fadeUp} className="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+              Empowering students in Sarsaundi with practical, job-oriented computer education. Build your digital future with us today.
+            </motion.p>
+            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
+              <Button size="lg" className="rounded bg-secondary hover:bg-secondary/90 text-white px-8 h-14 text-base font-semibold" onClick={() => window.scrollTo({top: document.getElementById('courses')?.offsetTop || 0, behavior: 'smooth'})}>
+                Explore Courses
+              </Button>
+              <Button size="lg" variant="outline" className="rounded border-2 border-white text-white hover:bg-white hover:text-primary px-8 h-14 text-base font-semibold" onClick={() => window.scrollTo({top: document.getElementById('contact')?.offsetTop || 0, behavior: 'smooth'})}>
+                Contact Us
+              </Button>
             </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative hidden lg:block"
-            >
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-3xl -rotate-3 scale-105" />
-              {/* landing page hero computer lab student learning */}
-              <img 
-                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=800&fit=crop" 
-                alt="Students learning computer skills" 
-                className="relative rounded-3xl shadow-2xl object-cover h-[500px] w-full border border-white/20"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-white dark:bg-card p-4 rounded-2xl shadow-xl flex items-center gap-4 animate-bounce" style={{ animationDuration: '3s' }}>
-                <div className="bg-green-100 p-3 rounded-full text-green-600">
-                  <CheckCircle2 size={24} />
-                </div>
-                <div>
-                  <p className="font-bold text-foreground">100% Practical</p>
-                  <p className="text-xs text-muted-foreground">Hands-on Training</p>
-                </div>
-              </div>
-            </motion.div>
+      {/* STATS BAR */}
+      <section className="bg-secondary text-white py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/20">
+            <div>
+              <h3 className="text-3xl md:text-4xl font-display font-bold mb-1">500+</h3>
+              <p className="text-sm font-medium uppercase tracking-wider text-blue-100">Students Taught</p>
+            </div>
+            <div>
+              <h3 className="text-3xl md:text-4xl font-display font-bold mb-1">5+</h3>
+              <p className="text-sm font-medium uppercase tracking-wider text-blue-100">Professional Courses</p>
+            </div>
+            <div>
+              <h3 className="text-3xl md:text-4xl font-display font-bold mb-1">3+</h3>
+              <p className="text-sm font-medium uppercase tracking-wider text-blue-100">Years Excellence</p>
+            </div>
+            <div>
+              <h3 className="text-3xl md:text-4xl font-display font-bold mb-1">100%</h3>
+              <p className="text-sm font-medium uppercase tracking-wider text-blue-100">Practical Focus</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ABOUT SECTION */}
-      <section id="about" className="py-24 bg-white dark:bg-background relative">
+      {/* ABOUT US */}
+      <section id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div 
-              initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }}
-              variants={fadeUp}
-              className="relative"
-            >
-              <div className="absolute -inset-4 bg-blue-50 dark:bg-blue-950/30 rounded-3xl rotate-3" />
-              {/* instructor teaching computer class */}
-              <img 
-                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=1000&fit=crop" 
-                alt="Instructor teaching" 
-                className="relative rounded-2xl shadow-lg w-full h-[500px] object-cover"
-              />
-            </motion.div>
-            
-            <motion.div 
-              initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }}
-              variants={staggerContainer}
-            >
-              <motion.h2 variants={fadeUp} className="text-primary font-bold tracking-wider uppercase text-sm mb-2">About Us</motion.h2>
-              <motion.h3 variants={fadeUp} className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">Empowering Sarsaundi with Digital Excellence</motion.h3>
-              <motion.p variants={fadeUp} className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                At <strong className="text-foreground">Star Computer's Academy</strong>, we believe that digital literacy is the foundation of a successful career in the 21st century. Located in the heart of Sarsaundi, we provide high-quality, practical computer education accessible to everyone.
-              </motion.p>
-              <motion.p variants={fadeUp} className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Whether you are a beginner taking your first steps, a student preparing for competitive exams like CCC, or a job seeker needing MS Office and Typing skills, our curriculum is tailored to make you confident and job-ready.
-              </motion.p>
-              
-              <motion.div variants={staggerContainer} className="grid grid-cols-2 gap-6">
-                {[
-                  { title: "Expert Faculty", desc: "Learn from industry professionals" },
-                  { title: "Modern Lab", desc: "1-to-1 computer ratio" },
-                  { title: "Certification", desc: "Valuable course certificates" },
-                  { title: "Career Focus", desc: "Resume & interview prep" }
-                ].map((item, i) => (
-                  <motion.div key={i} variants={fadeUp} className="flex gap-3">
-                    <CheckCircle2 className="text-primary shrink-0 mt-1" size={20} />
-                    <div>
-                      <h4 className="font-bold text-foreground">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-4">About Our Academy</h2>
+            <div className="h-1 w-20 bg-secondary mx-auto rounded"></div>
+          </div>
+          <div className="max-w-3xl mx-auto text-center text-slate-600 text-lg leading-relaxed">
+            <p className="mb-6">
+              Star Computer's Academy is the premier IT training institute located in Sarsaundi, Uttar Pradesh. We are dedicated to bridging the digital divide by providing high-quality, accessible computer education to students, job-seekers, and professionals.
+            </p>
+            <p>
+              Our curriculum is designed to meet industry standards, ensuring that every student who walks through our doors leaves with practical skills that translate directly into career opportunities.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* FEATURES SECTION */}
-      <section id="features" className="py-24 bg-slate-50 dark:bg-slate-900/50">
+      {/* FACILITIES / FEATURES */}
+      <section id="facilities" className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-primary font-bold tracking-wider uppercase text-sm mb-2">Why Choose Us</h2>
-            <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground">The Star Academy Advantage</h3>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-4">Our Facilities</h2>
+            <div className="h-1 w-20 bg-secondary mx-auto rounded"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: <Award size={32} />, title: "Experienced Instructor", desc: "Learn from passionate teachers with years of industry and academic experience." },
-              { icon: <MonitorPlay size={32} />, title: "Practical Training", desc: "Theory is good, but practice is better. 80% of our classes are hands-on on the keyboard." },
-              { icon: <Briefcase size={32} />, title: "Affordable Fees", desc: "Quality education shouldn't be a luxury. We offer competitive pricing and flexible installments." },
-              { icon: <GraduationCap size={32} />, title: "Job-Oriented", desc: "Syllabus designed based on current market requirements to help you secure employment fast." }
-            ].map((feature, i) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {facilities.map((facility, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white dark:bg-card p-8 rounded-2xl shadow-sm border border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                className="bg-white p-8 rounded-lg shadow-sm border border-slate-100 hover:shadow-md transition-shadow text-center group"
               >
-                <div className="h-16 w-16 bg-blue-50 dark:bg-blue-900/30 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  {feature.icon}
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                  {facility.icon}
                 </div>
-                <h4 className="text-xl font-bold text-foreground mb-3">{feature.title}</h4>
-                <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
+                <h3 className="text-xl font-bold text-slate-800 mb-3">{facility.title}</h3>
+                <p className="text-slate-600">{facility.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -231,22 +200,18 @@ export default function Home() {
       </section>
 
       {/* COURSES SECTION */}
-      <section id="courses" className="py-24 bg-white dark:bg-background">
+      <section id="courses" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div className="max-w-2xl">
-              <h2 className="text-primary font-bold tracking-wider uppercase text-sm mb-2">Our Programs</h2>
-              <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground">Featured Courses</h3>
-            </div>
-            <Button variant="outline" className="shrink-0 rounded-full" onClick={() => window.scrollTo({top: document.getElementById('contact')?.offsetTop || 0, behavior: 'smooth'})}>
-              Request Syllabus
-            </Button>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-4">Featured Courses</h2>
+            <div className="h-1 w-20 bg-secondary mx-auto rounded"></div>
+            <p className="mt-4 text-slate-600 max-w-2xl mx-auto">Choose from our range of industry-oriented courses designed to build your skills from the ground up.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {loadingCourses ? (
               Array(3).fill(0).map((_, i) => (
-                <div key={i} className="animate-pulse bg-slate-100 rounded-2xl h-[300px] w-full" />
+                <div key={i} className="animate-pulse bg-slate-100 rounded-lg h-[400px] w-full" />
               ))
             ) : courses.length > 0 ? (
               courses.map((course, i) => (
@@ -257,49 +222,43 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  <Card className="h-full hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden group">
-                    <div className="h-2 bg-gradient-to-r from-primary to-blue-400 w-0 group-hover:w-full transition-all duration-500" />
-                    <CardHeader>
-                      <div className="mb-4 text-primary bg-blue-50 dark:bg-blue-900/30 w-12 h-12 flex items-center justify-center rounded-lg">
-                        <BookOpen size={24} />
-                      </div>
-                      <CardTitle className="text-xl font-display">{course.title}</CardTitle>
-                      <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground font-medium">
-                        <span className="flex items-center gap-1"><MonitorPlay size={14} /> {course.duration}</span>
-                        <span className="flex items-center gap-1 text-primary"><Award size={14} /> ₹{course.fee}</span>
-                      </div>
+                  <Card className="h-full rounded-lg overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition-shadow flex flex-col">
+                    <div className="h-48 overflow-hidden bg-slate-100">
+                      {/* Using fallback images since API might not have them */}
+                      <img src={defaultCourses[i % defaultCourses.length].img} alt={course.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-xl font-bold text-primary">{course.title}</CardTitle>
                     </CardHeader>
-                    <CardContent className="flex-grow flex flex-col justify-between">
-                      <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-3">
+                    <CardContent className="flex-grow flex flex-col justify-between pt-0">
+                      <p className="text-slate-600 mb-6 line-clamp-3">
                         {course.description}
                       </p>
-                      <Button className="w-full bg-slate-100 text-foreground hover:bg-primary hover:text-white" variant="ghost" onClick={() => { document.querySelector('nav button:contains("Enroll Now")')?.dispatchEvent(new MouseEvent('click', { bubbles: true })) }}>
-                        Enroll in Course
+                      <div className="flex justify-between items-center mb-6 text-sm font-semibold text-slate-700 bg-slate-50 p-3 rounded">
+                        <span>Duration: {course.duration}</span>
+                        <span className="text-secondary">Fee: ₹{course.fee}</span>
+                      </div>
+                      <Button className="w-full bg-primary hover:bg-primary/90 text-white rounded font-semibold" onClick={() => { document.querySelector('nav button:contains("Enroll Now")')?.dispatchEvent(new MouseEvent('click', { bubbles: true })) }}>
+                        Enroll Now <ChevronRight size={16} className="ml-1" />
                       </Button>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))
             ) : (
-              // Fallback content if API is empty
-              [
-                { title: "Basic Computer Course (BCC)", desc: "Perfect for beginners. Learn computer fundamentals, operating systems, and basic internet usage.", dur: "3 Months", fee: "1500" },
-                { title: "MS Word, Excel, PowerPoint", desc: "Master the Microsoft Office Suite. Essential skills for every modern job profile and administrative roles.", dur: "2 Months", fee: "1200" },
-                { title: "Typing Classes (Hindi & English)", desc: "Increase your typing speed and accuracy. Crucial for data entry and government clerical jobs.", dur: "1-3 Months", fee: "500/mo" },
-                { title: "CCC Preparation", desc: "Dedicated coaching for the NIELIT Course on Computer Concepts (CCC) exam with mock tests.", dur: "3 Months", fee: "2000" },
-                { title: "Internet & Email Training", desc: "Learn to navigate the web safely, use search engines effectively, and manage professional email communication.", dur: "1 Month", fee: "800" }
-              ].map((c, i) => (
-                <Card key={i} className="h-full hover:shadow-xl transition-all duration-300 flex flex-col group">
-                  <div className="h-2 bg-primary w-0 group-hover:w-full transition-all duration-300" />
-                  <CardHeader>
-                    <CardTitle className="text-xl font-display">{c.title}</CardTitle>
-                    <div className="flex gap-4 mt-2 text-sm font-medium text-slate-500">
-                      <span>🕒 {c.dur}</span>
-                      <span className="text-primary">💰 ₹{c.fee}</span>
-                    </div>
+              defaultCourses.map((c, i) => (
+                <Card key={i} className="h-full rounded-lg overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition-shadow flex flex-col">
+                  <div className="h-48 overflow-hidden bg-slate-100">
+                    <img src={c.img} alt={c.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-xl font-bold text-primary">{c.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="flex-grow">
-                    <p className="text-muted-foreground">{c.desc}</p>
+                  <CardContent className="flex-grow flex flex-col justify-between pt-0">
+                    <p className="text-slate-600 mb-6">{c.desc}</p>
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-white rounded font-semibold" onClick={() => { document.querySelector('nav button:contains("Enroll Now")')?.dispatchEvent(new MouseEvent('click', { bubbles: true })) }}>
+                      Enroll Now <ChevronRight size={16} className="ml-1" />
+                    </Button>
                   </CardContent>
                 </Card>
               ))
@@ -308,63 +267,92 @@ export default function Home() {
         </div>
       </section>
 
+      {/* DIRECTOR'S MESSAGE */}
+      <section className="py-20 bg-primary text-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white/10 p-8 md:p-12 rounded-2xl backdrop-blur-sm border border-white/20">
+            <div className="flex flex-col md:flex-row items-center gap-10">
+              <div className="shrink-0">
+                <img 
+                  src="https://ui-avatars.com/api/?name=Director&background=2563eb&color=fff&size=200" 
+                  alt="Director" 
+                  className="w-40 h-40 rounded-full border-4 border-white/30 shadow-xl"
+                />
+              </div>
+              <div>
+                <Quote size={40} className="text-secondary/50 mb-4" />
+                <h3 className="text-2xl font-display font-bold mb-2">Director's Message</h3>
+                <p className="text-lg text-blue-50 leading-relaxed mb-6 italic">
+                  "Education is the most powerful weapon which you can use to change the world. At Star Computer's Academy, our mission is to empower the youth of Sarsaundi with cutting-edge digital skills. We are committed to providing quality education that not only builds knowledge but also creates successful careers."
+                </p>
+                <div>
+                  <h4 className="font-bold text-xl">Director Name</h4>
+                  <p className="text-secondary font-medium">Founder & Director</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TEAM SECTION */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-4">Our Expert Team</h2>
+            <div className="h-1 w-20 bg-secondary mx-auto rounded"></div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              { role: "Head of Institute", name: "Institute Head" },
+              { role: "Senior Trainer", name: "Senior Staff" },
+              { role: "Computer Instructor", name: "Instructor" }
+            ].map((staff, i) => (
+              <div key={i} className="bg-white p-6 rounded-lg text-center shadow-sm border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
+                <img 
+                  src={`https://ui-avatars.com/api/?name=${staff.name.replace(' ', '+')}&background=1a4fa0&color=fff&size=200`}
+                  alt={staff.name}
+                  className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-slate-50"
+                />
+                <h4 className="text-xl font-bold text-slate-800">{staff.name}</h4>
+                <p className="text-secondary font-medium mb-3">{staff.role}</p>
+                <p className="text-slate-500 text-sm">Dedicated to student success and practical learning methodologies.</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* TESTIMONIALS */}
-      <section id="testimonials" className="py-24 bg-slate-50 dark:bg-slate-900/50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-primary font-bold tracking-wider uppercase text-sm mb-2">Student Success</h2>
-          <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-16">What Our Students Say</h3>
+      <section id="testimonials" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-4">Student Reviews</h2>
+            <div className="h-1 w-20 bg-secondary mx-auto rounded"></div>
+          </div>
           
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {loadingTestimonials ? (
-              <div className="animate-pulse bg-slate-200 rounded-2xl h-64 w-full max-w-md mx-auto" />
+              <div className="col-span-full animate-pulse bg-slate-100 rounded-lg h-32" />
             ) : testimonials.length > 0 ? (
               testimonials.map((t, i) => (
-                <motion.div 
-                  key={t.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-white dark:bg-card p-8 rounded-3xl shadow-sm border border-border max-w-md text-left relative"
-                >
-                  <Quote className="absolute top-6 right-8 text-slate-100 dark:text-slate-800" size={60} />
-                  <div className="flex gap-1 text-amber-400 mb-6 relative z-10">
-                    {Array(t.rating).fill(0).map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
-                  </div>
-                  <p className="text-lg text-foreground mb-8 relative z-10 leading-relaxed italic">"{t.review}"</p>
-                  <div className="flex items-center gap-4 relative z-10">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-blue-400 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-inner">
-                      {t.studentName.charAt(0)}
-                    </div>
-                    <div>
-                      <h5 className="font-bold text-foreground">{t.studentName}</h5>
-                      <p className="text-sm text-muted-foreground">{t.course}</p>
-                    </div>
-                  </div>
-                </motion.div>
+                <div key={t.id} className="bg-slate-50 p-6 rounded-lg border-l-4 border-secondary shadow-sm">
+                  <p className="text-slate-600 mb-4 italic">"{t.review}"</p>
+                  <h5 className="font-bold text-slate-800">{t.studentName}</h5>
+                  <p className="text-sm text-primary">{t.course}</p>
+                </div>
               ))
             ) : (
-              // Fallback
               [
-                { n: "Rahul Kumar", c: "CCC Preparation", r: "The practical approach to teaching here is amazing. I cleared my CCC exam on the first attempt with a good grade!" },
-                { n: "Priya Singh", c: "MS Office & Typing", r: "Got a data entry job right after completing my course. The typing speed techniques taught were extremely helpful." },
-                { n: "Amit Verma", c: "Basic Computer Course", r: "I didn't know anything about computers before joining. The instructors are very patient and explain everything clearly." }
+                { n: "Rahul Kumar", c: "CCC Preparation", r: "The practical approach to teaching here is amazing. I cleared my CCC exam easily!" },
+                { n: "Priya Singh", c: "MS Office & Typing", r: "Got a data entry job right after completing my course. The typing techniques were very helpful." },
+                { n: "Amit Verma", c: "Basic Computer Course", r: "Great environment for beginners. Instructors are patient and knowledgeable." }
               ].map((t, i) => (
-                <div key={i} className="bg-white dark:bg-card p-8 rounded-3xl shadow-sm border border-border max-w-md text-left relative">
-                  <Quote className="absolute top-6 right-8 text-slate-100" size={60} />
-                  <div className="flex gap-1 text-amber-400 mb-6">
-                    {Array(5).fill(0).map((_, j) => <Star key={j} size={18} fill="currentColor" />)}
-                  </div>
-                  <p className="text-lg text-foreground mb-8 relative z-10">"{t.r}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      {t.n.charAt(0)}
-                    </div>
-                    <div>
-                      <h5 className="font-bold text-foreground">{t.n}</h5>
-                      <p className="text-sm text-muted-foreground">{t.c}</p>
-                    </div>
-                  </div>
+                <div key={i} className="bg-slate-50 p-6 rounded-lg border-l-4 border-secondary shadow-sm">
+                  <p className="text-slate-600 mb-4 italic">"{t.r}"</p>
+                  <h5 className="font-bold text-slate-800">{t.n}</h5>
+                  <p className="text-sm text-primary">{t.c}</p>
                 </div>
               ))
             )}
@@ -373,87 +361,88 @@ export default function Home() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="py-24 bg-white dark:bg-background">
+      <section id="contact" className="py-20 bg-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
-            
-            <div>
-              <h2 className="text-primary font-bold tracking-wider uppercase text-sm mb-2">Get in Touch</h2>
-              <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">We'd Love to Hear From You</h3>
-              <p className="text-muted-foreground mb-10 text-lg">
-                Have questions about our courses or admissions? Drop us a message or visit our academy in Sarsaundi.
-              </p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-4">Contact Us</h2>
+            <div className="h-1 w-20 bg-secondary mx-auto rounded"></div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 bg-white rounded-xl shadow-md overflow-hidden">
+            <div className="p-8 md:p-12 bg-primary text-white">
+              <h3 className="text-2xl font-bold mb-8">Get In Touch</h3>
               
-              <div className="space-y-8">
-                <div className="flex gap-5 items-start">
-                  <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-xl text-primary shrink-0">
-                    <MapPin size={24} />
-                  </div>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <MapPin className="text-secondary shrink-0 mt-1" size={24} />
                   <div>
-                    <h4 className="font-bold text-xl mb-1 text-foreground">Our Location</h4>
-                    <p className="text-muted-foreground">X323+PRJ, Sarsaundi<br/>Uttar Pradesh, 225001<br/>India</p>
+                    <h4 className="font-semibold text-lg">Location</h4>
+                    <p className="text-blue-100">X323+PRJ, Sarsaundi<br/>Uttar Pradesh, 225001<br/>India</p>
                   </div>
                 </div>
                 
-                <div className="flex gap-5 items-start">
-                  <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-xl text-primary shrink-0">
-                    <Phone size={24} />
-                  </div>
+                <div className="flex items-start gap-4">
+                  <Phone className="text-secondary shrink-0 mt-1" size={24} />
                   <div>
-                    <h4 className="font-bold text-xl mb-1 text-foreground">Call Us</h4>
-                    <p className="text-muted-foreground">+91 98765 43210<br/>Mon-Sat: 9:00 AM - 6:00 PM</p>
+                    <h4 className="font-semibold text-lg">Phone</h4>
+                    <p className="text-blue-100">+91 98765 43210</p>
                   </div>
                 </div>
 
-                <div className="flex gap-5 items-start">
-                  <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-xl text-primary shrink-0">
-                    <Mail size={24} />
-                  </div>
+                <div className="flex items-start gap-4">
+                  <Mail className="text-secondary shrink-0 mt-1" size={24} />
                   <div>
-                    <h4 className="font-bold text-xl mb-1 text-foreground">Email Us</h4>
-                    <p className="text-muted-foreground">info@staracademy.in</p>
+                    <h4 className="font-semibold text-lg">Email</h4>
+                    <p className="text-blue-100">starcomputeracademy@gmail.com</p>
                   </div>
                 </div>
               </div>
+
+              <div className="mt-12 h-64 rounded-lg overflow-hidden w-full">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113942.86873199859!2d80.85233155!3d26.81855685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399e03d36b81561f%3A0x6e9f1a0e0d6b8!2sSarsaundi%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style={{border:0}} 
+                  allowFullScreen={false} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Academy Location"
+                ></iframe>
+              </div>
             </div>
 
-            <div className="bg-slate-50 dark:bg-slate-900 p-8 rounded-3xl shadow-sm border border-border">
-              <h4 className="font-display font-bold text-2xl mb-6 text-foreground">Send a Message</h4>
-              <form onSubmit={handleSubmit(onContactSubmit)} className="space-y-5">
+            <div className="p-8 md:p-12">
+              <h3 className="text-2xl font-bold text-slate-800 mb-6">Send a Message</h3>
+              <form onSubmit={handleSubmit(onContactSubmit)} className="space-y-6">
                 <div>
-                  <Input placeholder="Your Full Name *" {...register("name")} className={`bg-white h-12 ${errors.name ? 'border-destructive' : ''}`} />
-                  {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
+                  <label className="text-sm font-semibold text-slate-700 block mb-2">Your Name</label>
+                  <Input {...register("name")} className={`bg-slate-50 border-slate-200 ${errors.name ? 'border-red-500' : ''}`} />
+                  {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>}
                 </div>
+                
                 <div>
-                  <Input placeholder="Phone Number *" type="tel" {...register("phone")} className={`bg-white h-12 ${errors.phone ? 'border-destructive' : ''}`} />
-                  {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone.message}</p>}
+                  <label className="text-sm font-semibold text-slate-700 block mb-2">Phone Number</label>
+                  <Input type="tel" {...register("phone")} className={`bg-slate-50 border-slate-200 ${errors.phone ? 'border-red-500' : ''}`} />
+                  {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>}
                 </div>
+                
                 <div>
-                  <Input placeholder="Email Address" type="email" {...register("email")} className="bg-white h-12" />
+                  <label className="text-sm font-semibold text-slate-700 block mb-2">Email Address</label>
+                  <Input type="email" {...register("email")} className="bg-slate-50 border-slate-200" />
                 </div>
+                
                 <div>
-                  <Textarea placeholder="How can we help you? *" {...register("message")} rows={4} className={`bg-white ${errors.message ? 'border-destructive' : ''}`} />
-                  {errors.message && <p className="text-xs text-destructive mt-1">{errors.message.message}</p>}
+                  <label className="text-sm font-semibold text-slate-700 block mb-2">Message</label>
+                  <Textarea {...register("message")} rows={4} className={`bg-slate-50 border-slate-200 ${errors.message ? 'border-red-500' : ''}`} />
+                  {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message.message}</p>}
                 </div>
-                <Button size="lg" className="w-full h-14 text-base rounded-xl shadow-lg" disabled={createContactMutation.isPending}>
-                  {createContactMutation.isPending ? "Sending..." : "Send Message"}
+                
+                <Button type="submit" size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold" disabled={createContactMutation.isPending}>
+                  {createContactMutation.isPending ? "Sending..." : "Submit Message"}
                 </Button>
               </form>
             </div>
-
-          </div>
-
-          <div className="mt-16 rounded-3xl overflow-hidden shadow-lg h-[400px] bg-slate-200">
-            {/* Embed Map for Sarsaundi */}
-            <iframe 
-              src="https://maps.google.com/maps?q=Sarsaundi%2C%20Uttar%20Pradesh%20225001&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
           </div>
         </div>
       </section>

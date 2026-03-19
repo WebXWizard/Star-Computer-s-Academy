@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Mail, Phone, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -36,7 +36,7 @@ export function Navbar() {
   });
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -56,108 +56,131 @@ export function Navbar() {
 
   const navLinks = [
     { name: 'Home', href: '/#' },
-    { name: 'About Us', href: '/#about' },
+    { name: 'About', href: '/#about' },
     { name: 'Courses', href: '/#courses' },
-    { name: 'Features', href: '/#features' },
+    { name: 'Facilities', href: '/#facilities' },
     { name: 'Testimonials', href: '/#testimonials' },
     { name: 'Contact', href: '/#contact' },
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-white py-5'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-3">
-            <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Star Academy" className="h-10 w-10 object-contain" />
-            <span className="font-display font-bold text-xl text-primary">Star Academy</span>
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            <div className="flex gap-6">
-              {navLinks.map((link) => (
-                <a key={link.name} href={link.href} className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-                  {link.name}
-                </a>
-              ))}
+    <div className="fixed top-0 w-full z-50 transition-all duration-300">
+      {/* Top Info Bar */}
+      <div className={`bg-primary text-white py-2 px-4 transition-all duration-300 ${isScrolled ? 'hidden' : 'block'}`}>
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm">
+          <div className="flex items-center gap-4 mb-2 sm:mb-0">
+            <div className="flex items-center gap-1">
+              <Mail size={14} className="text-secondary" />
+              <span>starcomputeracademy@gmail.com</span>
             </div>
-            
-            <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-              <DialogTrigger asChild>
-                <Button className="font-semibold rounded-full px-6">Enroll Now</Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle className="text-2xl font-display text-primary">Start Your Journey</DialogTitle>
-                </DialogHeader>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
-                  <div>
-                    <Input placeholder="Full Name *" {...register("name")} className={errors.name ? "border-destructive" : ""} />
-                    {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
-                  </div>
-                  <div>
-                    <Input placeholder="Phone Number *" type="tel" {...register("phone")} className={errors.phone ? "border-destructive" : ""} />
-                    {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone.message}</p>}
-                  </div>
-                  <div>
-                    <Input placeholder="Email Address (Optional)" type="email" {...register("email")} />
-                  </div>
-                  <div>
-                    <Select onValueChange={(val) => setValue("course", val)}>
-                      <SelectTrigger className={errors.course ? "border-destructive" : ""}>
-                        <SelectValue placeholder="Select a Course *" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {courses.length > 0 ? (
-                          courses.map(c => <SelectItem key={c.id} value={c.title}>{c.title}</SelectItem>)
-                        ) : (
-                          <>
-                            <SelectItem value="Basic Computer Course">Basic Computer Course</SelectItem>
-                            <SelectItem value="MS Office Training">MS Office Training</SelectItem>
-                            <SelectItem value="CCC Preparation">CCC Preparation</SelectItem>
-                            <SelectItem value="Typing (Hindi/English)">Typing (Hindi/English)</SelectItem>
-                          </>
-                        )}
-                      </SelectContent>
-                    </Select>
-                    {errors.course && <p className="text-xs text-destructive mt-1">{errors.course.message}</p>}
-                  </div>
-                  <div>
-                    <Textarea placeholder="Any questions or messages? (Optional)" {...register("message")} rows={3} />
-                  </div>
-                  <Button type="submit" className="w-full" disabled={createEnrollmentMutation.isPending}>
-                    {createEnrollmentMutation.isPending ? "Submitting..." : "Submit Application"}
-                  </Button>
-                </form>
-              </DialogContent>
-            </Dialog>
+            <div className="hidden md:flex items-center gap-1">
+              <MapPin size={14} className="text-secondary" />
+              <span>X323+PRJ, Sarsaundi, UP 225001</span>
+            </div>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button className="md:hidden p-2 text-foreground" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-1">
+            <Phone size={14} className="text-secondary" />
+            <span className="font-semibold">+91 9876543210</span>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Nav */}
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t py-4 px-4 flex flex-col gap-4">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-foreground/80 hover:text-primary p-2 rounded-md hover:bg-muted"
-            >
-              {link.name}
-            </a>
-          ))}
-          <Button className="w-full mt-2" onClick={() => { setMobileMenuOpen(false); setModalOpen(true); }}>
-            Enroll Now
-          </Button>
+      {/* Main Navbar */}
+      <nav className={`bg-white shadow-md transition-all duration-300 ${isScrolled ? 'py-3' : 'py-4'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            <Link href="/" className="flex items-center gap-3">
+              <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Star Academy" className="h-12 w-12 object-contain" />
+              <span className="font-display font-extrabold text-2xl text-primary tracking-tight">Star Academy</span>
+            </Link>
+
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center gap-8">
+              <div className="flex gap-6">
+                {navLinks.map((link) => (
+                  <a key={link.name} href={link.href} className="text-[15px] font-semibold text-slate-700 hover:text-primary transition-colors">
+                    {link.name}
+                  </a>
+                ))}
+              </div>
+              
+              <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+                <DialogTrigger asChild>
+                  <Button className="font-semibold rounded px-6 bg-secondary hover:bg-secondary/90 text-white">Enroll Now</Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-display text-primary">Start Your Journey</DialogTitle>
+                  </DialogHeader>
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
+                    <div>
+                      <Input placeholder="Full Name *" {...register("name")} className={errors.name ? "border-destructive" : ""} />
+                      {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
+                    </div>
+                    <div>
+                      <Input placeholder="Phone Number *" type="tel" {...register("phone")} className={errors.phone ? "border-destructive" : ""} />
+                      {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone.message}</p>}
+                    </div>
+                    <div>
+                      <Input placeholder="Email Address (Optional)" type="email" {...register("email")} />
+                    </div>
+                    <div>
+                      <Select onValueChange={(val) => setValue("course", val)}>
+                        <SelectTrigger className={errors.course ? "border-destructive" : ""}>
+                          <SelectValue placeholder="Select a Course *" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {courses.length > 0 ? (
+                            courses.map(c => <SelectItem key={c.id} value={c.title}>{c.title}</SelectItem>)
+                          ) : (
+                            <>
+                              <SelectItem value="Basic Computer Course">Basic Computer Course</SelectItem>
+                              <SelectItem value="MS Office Training">MS Office Training</SelectItem>
+                              <SelectItem value="CCC Preparation">CCC Preparation</SelectItem>
+                              <SelectItem value="Typing (Hindi/English)">Typing (Hindi/English)</SelectItem>
+                            </>
+                          )}
+                        </SelectContent>
+                      </Select>
+                      {errors.course && <p className="text-xs text-destructive mt-1">{errors.course.message}</p>}
+                    </div>
+                    <div>
+                      <Textarea placeholder="Any questions or messages? (Optional)" {...register("message")} rows={3} />
+                    </div>
+                    <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90" disabled={createEnrollmentMutation.isPending}>
+                      {createEnrollmentMutation.isPending ? "Submitting..." : "Submit Application"}
+                    </Button>
+                  </form>
+                </DialogContent>
+              </Dialog>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button className="lg:hidden p-2 text-primary" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
-      )}
-    </nav>
+
+        {/* Mobile Nav */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t py-4 px-4 flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-base font-semibold text-slate-700 hover:text-primary p-2 rounded-md hover:bg-slate-50"
+              >
+                {link.name}
+              </a>
+            ))}
+            <Button className="w-full mt-2 bg-secondary hover:bg-secondary/90 text-white" onClick={() => { setMobileMenuOpen(false); setModalOpen(true); }}>
+              Enroll Now
+            </Button>
+          </div>
+        )}
+      </nav>
+    </div>
   );
 }
