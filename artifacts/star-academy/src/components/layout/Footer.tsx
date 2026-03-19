@@ -2,82 +2,104 @@ import { Link } from 'wouter';
 import { MapPin, Phone, Mail, Facebook, Youtube, MessageCircle, ChevronRight } from 'lucide-react';
 
 export function Footer() {
+  const quickLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'About Us', href: '/about' },
+    { label: 'Our Courses', href: '/courses' },
+    { label: 'Facilities', href: '/facilities' },
+    { label: 'Testimonials', href: '/testimonials' },
+    { label: 'Contact Us', href: '/contact' },
+  ];
+
   return (
-    <footer className="bg-[#0f172a] text-white pt-16 pb-8 border-t-[6px] border-secondary">
+    <footer style={{ background: 'hsl(180,76%,10%)', fontFamily: 'Inter,sans-serif' }} className="text-white pt-14 pb-8 border-t-4 border-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          
-          <div className="space-y-4 lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="bg-white p-1 rounded-md">
-                <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Star Academy" className="h-10 w-10 object-contain" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+
+          {/* Brand */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="bg-white/10 p-1.5 rounded-lg">
+                <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Star Academy" className="h-9 w-9 object-contain" />
               </div>
-              <span className="font-display font-bold text-2xl tracking-tight">Star Academy</span>
+              <div>
+                <span className="font-bold text-lg block leading-tight">Star Computer's</span>
+                <span className="font-semibold text-sm block leading-tight" style={{ color: 'hsl(28,90%,68%)' }}>Academy</span>
+              </div>
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Leading computer education institute in Sarsaundi. Empowering students with practical digital skills to succeed in the modern professional world.
+            <p className="text-white/60 text-sm leading-relaxed">
+              Premier computer education institute in Sarsaundi, UP. Empowering students and job seekers with practical digital skills.
             </p>
           </div>
 
+          {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-6 relative pb-2 inline-block">
-              Quick Links
-              <span className="absolute bottom-0 left-0 w-1/2 h-1 bg-secondary rounded"></span>
+            <h3 className="text-base font-bold mb-5 pb-2 border-b border-white/10 flex items-center gap-2">
+              <span style={{ color: 'hsl(28,90%,68%)' }}>—</span> Quick Links
             </h3>
-            <ul className="space-y-3">
-              <li><a href="/#" className="text-slate-400 hover:text-secondary transition-colors flex items-center gap-2"><ChevronRight size={14} className="text-secondary" /> Home</a></li>
-              <li><a href="/#about" className="text-slate-400 hover:text-secondary transition-colors flex items-center gap-2"><ChevronRight size={14} className="text-secondary" /> About Us</a></li>
-              <li><a href="/#courses" className="text-slate-400 hover:text-secondary transition-colors flex items-center gap-2"><ChevronRight size={14} className="text-secondary" /> Our Courses</a></li>
-              <li><a href="/#contact" className="text-slate-400 hover:text-secondary transition-colors flex items-center gap-2"><ChevronRight size={14} className="text-secondary" /> Contact</a></li>
+            <ul className="space-y-2.5">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-white/60 hover:text-secondary transition-colors flex items-center gap-2 text-sm font-medium">
+                    <ChevronRight size={13} style={{ color: 'hsl(28,90%,68%)' }} />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Contact */}
           <div>
-            <h3 className="text-lg font-bold mb-6 relative pb-2 inline-block">
-              Get In Touch
-              <span className="absolute bottom-0 left-0 w-1/2 h-1 bg-secondary rounded"></span>
+            <h3 className="text-base font-bold mb-5 pb-2 border-b border-white/10 flex items-center gap-2">
+              <span style={{ color: 'hsl(28,90%,68%)' }}>—</span> Contact Info
             </h3>
-            <ul className="space-y-4 text-sm text-slate-400">
-              <li className="flex gap-3 items-start">
-                <MapPin className="text-secondary shrink-0 mt-0.5" size={18} />
-                <span>X323+PRJ, Sarsaundi,<br/>Uttar Pradesh, 225001</span>
+            <ul className="space-y-3.5 text-sm text-white/60">
+              <li className="flex gap-2.5 items-start">
+                <MapPin size={16} className="flex-shrink-0 mt-0.5" style={{ color: 'hsl(28,90%,68%)' }} />
+                <span>X323+PRJ, Sarsaundi,<br />Uttar Pradesh, 225001</span>
               </li>
-              <li className="flex gap-3 items-center">
-                <Phone className="text-secondary shrink-0" size={18} />
-                <span>+91 98765 43210</span>
+              <li className="flex gap-2.5 items-center">
+                <Phone size={16} className="flex-shrink-0" style={{ color: 'hsl(28,90%,68%)' }} />
+                <a href="tel:+919876543210" className="hover:text-secondary transition-colors">+91 9876543210</a>
               </li>
-              <li className="flex gap-3 items-center">
-                <Mail className="text-secondary shrink-0" size={18} />
-                <span>starcomputeracademy@gmail.com</span>
+              <li className="flex gap-2.5 items-center">
+                <Mail size={16} className="flex-shrink-0" style={{ color: 'hsl(28,90%,68%)' }} />
+                <a href="mailto:starcomputeracademy@gmail.com" className="hover:text-secondary transition-colors text-xs">starcomputeracademy@gmail.com</a>
               </li>
             </ul>
           </div>
 
+          {/* Social */}
           <div>
-            <h3 className="text-lg font-bold mb-6 relative pb-2 inline-block">
-              Connect With Us
-              <span className="absolute bottom-0 left-0 w-1/2 h-1 bg-secondary rounded"></span>
+            <h3 className="text-base font-bold mb-5 pb-2 border-b border-white/10 flex items-center gap-2">
+              <span style={{ color: 'hsl(28,90%,68%)' }}>—</span> Follow Us
             </h3>
-            <p className="text-slate-400 text-sm mb-4">Follow us on social media for updates and tech tips.</p>
-            <div className="flex gap-3">
-              <a href="#" className="h-10 w-10 rounded bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors">
-                <Facebook size={18} />
+            <p className="text-white/60 text-sm mb-4">Stay connected for updates and digital tips.</p>
+            <div className="flex gap-2.5">
+              <a href="#" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-600 transition-colors" title="Facebook">
+                <Facebook size={17} />
               </a>
-              <a href="#" className="h-10 w-10 rounded bg-white/10 flex items-center justify-center hover:bg-red-600 transition-colors">
-                <Youtube size={18} />
+              <a href="#" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-red-600 transition-colors" title="YouTube">
+                <Youtube size={17} />
               </a>
-              <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" className="h-10 w-10 rounded bg-white/10 flex items-center justify-center hover:bg-[#25D366] transition-colors">
-                <MessageCircle size={18} />
+              <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#25D366] transition-colors" title="WhatsApp">
+                <MessageCircle size={17} />
               </a>
+            </div>
+            <div className="mt-5 p-3 rounded-lg bg-white/5 border border-white/10">
+              <p className="text-xs text-white/50 mb-1 font-semibold uppercase tracking-wide">Working Hours</p>
+              <p className="text-xs text-white/70">Mon–Sat: 7:00 AM – 7:00 PM</p>
+              <p className="text-xs text-white/50">Sunday: Closed</p>
             </div>
           </div>
 
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-          <p>© {new Date().getFullYear()} Star Computer's Academy. All rights reserved.</p>
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-white/40">
+          <p>© {new Date().getFullYear()} Star Computer's Academy, Sarsaundi. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <Link href="/admin" className="hover:text-secondary transition-colors">Admin Login</Link>
+            <Link href="/admin" className="hover:text-white/70 transition-colors">Admin Portal</Link>
           </div>
         </div>
       </div>

@@ -6,6 +6,12 @@ import { AuthProvider, useAuth } from "./lib/auth";
 import NotFound from "@/pages/not-found";
 
 import Home from "./pages/public/Home";
+import About from "./pages/public/About";
+import Courses from "./pages/public/Courses";
+import Facilities from "./pages/public/Facilities";
+import Testimonials from "./pages/public/Testimonials";
+import Contact from "./pages/public/Contact";
+
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminEnrollments from "./pages/admin/Enrollments";
@@ -37,9 +43,14 @@ function ProtectedRoute({ component: Component }: { component: React.ComponentTy
 function Router() {
   return (
     <Switch>
-      {/* Public Route */}
+      {/* Public Routes */}
       <Route path="/" component={Home} />
-      
+      <Route path="/about" component={About} />
+      <Route path="/courses" component={Courses} />
+      <Route path="/facilities" component={Facilities} />
+      <Route path="/testimonials" component={Testimonials} />
+      <Route path="/contact" component={Contact} />
+
       {/* Admin Routes */}
       <Route path="/admin" component={AdminLogin} />
       <Route path="/admin/dashboard">

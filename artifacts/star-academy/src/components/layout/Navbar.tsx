@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { Menu, X, Mail, Phone, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -26,6 +26,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [location] = useLocation();
   const { toast } = useToast();
 
   const { data: courses = [] } = useListCourses();
@@ -41,78 +42,100 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location]);
+
   const onSubmit = (data: EnrollmentForm) => {
     createEnrollmentMutation.mutate({ data }, {
       onSuccess: () => {
-        toast({ title: "Enrollment submitted successfully! We will contact you soon." });
+        toast({ title: "Enrollment submitted! We'll contact you soon." });
         setModalOpen(false);
         reset();
       },
       onError: () => {
-        toast({ title: "Failed to submit enrollment. Please try again.", variant: "destructive" });
+        toast({ title: "Failed to submit. Please try again.", variant: "destructive" });
       }
     });
   };
 
   const navLinks = [
-    { name: 'Home', href: '/#' },
-    { name: 'About', href: '/#about' },
-    { name: 'Courses', href: '/#courses' },
-    { name: 'Facilities', href: '/#facilities' },
-    { name: 'Testimonials', href: '/#testimonials' },
-    { name: 'Contact', href: '/#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Courses', href: '/courses' },
+    { name: 'Facilities', href: '/facilities' },
+    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Contact', href: '/contact' },
   ];
 
+  const isActive = (href: string) => {
+    if (href === '/') return location === '/';
+    return location.startsWith(href);
+  };
+
   return (
-    <div className="fixed top-0 w-full z-50 transition-all duration-300">
+    <div className="fixed top-0 w-full z-50">
       {/* Top Info Bar */}
-      <div className={`bg-primary text-white py-2 px-4 transition-all duration-300 ${isScrolled ? 'hidden' : 'block'}`}>
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm">
-          <div className="flex items-center gap-4 mb-2 sm:mb-0">
-            <div className="flex items-center gap-1">
-              <Mail size={14} className="text-secondary" />
+      <div className={`bg-primary text-white transition-all duration-300 ${isScrolled ? 'hidden' : 'block'}`}>
+        <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm gap-1 sm:gap-0">
+          <div className="flex items-center gap-4">
+            <a href="mailto:starcomputeracademy@gmail.com" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
+              <Mail size={13} />
               <span>starcomputeracademy@gmail.com</span>
-            </div>
-            <div className="hidden md:flex items-center gap-1">
-              <MapPin size={14} className="text-secondary" />
+            </a>
+            <span className="hidden md:flex items-center gap-1.5">
+              <MapPin size={13} className="text-secondary" />
               <span>X323+PRJ, Sarsaundi, UP 225001</span>
-            </div>
+            </span>
           </div>
-          <div className="flex items-center gap-1">
-            <Phone size={14} className="text-secondary" />
-            <span className="font-semibold">+91 9876543210</span>
-          </div>
+          <a href="tel:+919876543210" className="flex items-center gap-1.5 font-semibold hover:text-secondary transition-colors">
+            <Phone size={13} />
+            <span>+91 9876543210</span>
+          </a>
         </div>
       </div>
 
       {/* Main Navbar */}
-      <nav className={`bg-white shadow-md transition-all duration-300 ${isScrolled ? 'py-3' : 'py-4'}`}>
+      <nav className={`bg-white border-b border-border transition-all duration-300 ${isScrolled ? 'shadow-md py-2' : 'py-3'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center gap-3">
-              <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Star Academy" className="h-12 w-12 object-contain" />
-              <span className="font-display font-extrabold text-2xl text-primary tracking-tight">Star Academy</span>
+            <Link href="/" className="flex items-center gap-3 group">
+              <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Star Academy" className="h-11 w-11 object-contain" />
+              <div>
+                <span className="font-bold text-xl text-primary block leading-tight tracking-tight" style={{fontFamily:'Inter,sans-serif'}}>Star Computer's</span>
+                <span className="font-semibold text-sm text-secondary block leading-tight tracking-wide">Academy</span>
+              </div>
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-8">
-              <div className="flex gap-6">
+            <div className="hidden lg:flex items-center gap-6">
+              <div className="flex gap-1">
                 {navLinks.map((link) => (
-                  <a key={link.name} href={link.href} className="text-[15px] font-semibold text-slate-700 hover:text-primary transition-colors">
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200 ${
+                      isActive(link.href)
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-slate-600 hover:text-primary hover:bg-primary/5'
+                    }`}
+                  >
                     {link.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
-              
+
               <Dialog open={modalOpen} onOpenChange={setModalOpen}>
                 <DialogTrigger asChild>
-                  <Button className="font-semibold rounded px-6 bg-secondary hover:bg-secondary/90 text-white">Enroll Now</Button>
+                  <Button className="font-semibold rounded-md px-5 bg-secondary hover:bg-secondary/90 text-white text-sm">
+                    Enroll Now
+                  </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-[420px]">
                   <DialogHeader>
-                    <DialogTitle className="text-2xl font-display text-primary">Start Your Journey</DialogTitle>
+                    <DialogTitle className="text-xl font-bold text-primary">Start Your Journey</DialogTitle>
                   </DialogHeader>
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 mt-3">
                     <div>
                       <Input placeholder="Full Name *" {...register("name")} className={errors.name ? "border-destructive" : ""} />
                       {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
@@ -121,9 +144,7 @@ export function Navbar() {
                       <Input placeholder="Phone Number *" type="tel" {...register("phone")} className={errors.phone ? "border-destructive" : ""} />
                       {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone.message}</p>}
                     </div>
-                    <div>
-                      <Input placeholder="Email Address (Optional)" type="email" {...register("email")} />
-                    </div>
+                    <Input placeholder="Email Address (Optional)" type="email" {...register("email")} />
                     <div>
                       <Select onValueChange={(val) => setValue("course", val)}>
                         <SelectTrigger className={errors.course ? "border-destructive" : ""}>
@@ -144,10 +165,8 @@ export function Navbar() {
                       </Select>
                       {errors.course && <p className="text-xs text-destructive mt-1">{errors.course.message}</p>}
                     </div>
-                    <div>
-                      <Textarea placeholder="Any questions or messages? (Optional)" {...register("message")} rows={3} />
-                    </div>
-                    <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90" disabled={createEnrollmentMutation.isPending}>
+                    <Textarea placeholder="Any message? (Optional)" {...register("message")} rows={3} />
+                    <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white font-semibold" disabled={createEnrollmentMutation.isPending}>
                       {createEnrollmentMutation.isPending ? "Submitting..." : "Submit Application"}
                     </Button>
                   </form>
@@ -157,25 +176,31 @@ export function Navbar() {
 
             {/* Mobile Menu Button */}
             <button className="lg:hidden p-2 text-primary" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
         </div>
 
         {/* Mobile Nav */}
         {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t py-4 px-4 flex flex-col gap-4">
+          <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t py-3 px-4 flex flex-col gap-1">
             {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-semibold text-slate-700 hover:text-primary p-2 rounded-md hover:bg-slate-50"
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`text-sm font-semibold p-2.5 rounded-md transition-colors ${
+                  isActive(link.href)
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-slate-700 hover:text-primary hover:bg-primary/5'
+                }`}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
-            <Button className="w-full mt-2 bg-secondary hover:bg-secondary/90 text-white" onClick={() => { setMobileMenuOpen(false); setModalOpen(true); }}>
+            <Button
+              className="w-full mt-2 bg-secondary hover:bg-secondary/90 text-white font-semibold"
+              onClick={() => { setMobileMenuOpen(false); setModalOpen(true); }}
+            >
               Enroll Now
             </Button>
           </div>
