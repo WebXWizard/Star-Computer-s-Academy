@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/lib/auth';
-import { LayoutDashboard, Users, BookOpen, MessageSquare, Star, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, BookOpen, MessageSquare, Star, LogOut, ExternalLink } from 'lucide-react';
 
 export function AdminSidebar() {
   const [location] = useLocation();
@@ -15,37 +15,57 @@ export function AdminSidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col h-screen fixed top-0 left-0">
-      <div className="h-16 flex items-center px-6 bg-slate-950 border-b border-slate-800">
-        <h2 className="text-white font-display font-bold text-lg flex items-center gap-2">
-          <span className="text-primary">★</span> Star Admin
-        </h2>
+    <aside
+      className="w-64 flex flex-col h-screen fixed top-0 left-0 z-40"
+      style={{ background: 'hsl(180,76%,10%)' }}
+    >
+      {/* Brand Header */}
+      <div className="px-5 py-5 border-b" style={{ borderColor: 'hsl(180,60%,18%)' }}>
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center font-extrabold text-lg" style={{ background: 'hsl(28,75%,52%)' }}>
+            ★
+          </div>
+          <div>
+            <p className="font-bold text-white text-sm leading-tight">Star Computer's</p>
+            <p className="text-xs font-medium leading-tight" style={{ color: 'hsl(28,90%,68%)' }}>Admin Panel</p>
+          </div>
+        </div>
       </div>
-      
-      <div className="flex-1 py-6 px-4 space-y-2">
+
+      {/* Nav Links */}
+      <nav className="flex-1 py-5 px-3 space-y-1 overflow-y-auto">
         {menuItems.map((item) => {
-          const active = location === item.href;
+          const active = location === item.href || location.startsWith(item.href);
           return (
             <Link key={item.href} href={item.href}>
-              <div className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all cursor-pointer ${
-                active 
-                  ? 'bg-primary text-white font-medium shadow-md shadow-primary/20' 
-                  : 'hover:bg-slate-800 hover:text-white'
-              }`}>
-                <item.icon size={20} />
+              <div className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all cursor-pointer text-sm font-semibold ${
+                active
+                  ? 'text-white shadow-md'
+                  : 'text-white/55 hover:text-white hover:bg-white/8'
+              }`}
+                style={active ? { background: 'hsl(28,75%,52%)' } : {}}
+              >
+                <item.icon size={18} />
                 {item.label}
               </div>
             </Link>
           );
         })}
-      </div>
+      </nav>
 
-      <div className="p-4 border-t border-slate-800">
-        <button 
+      {/* Bottom */}
+      <div className="p-3 space-y-1 border-t" style={{ borderColor: 'hsl(180,60%,18%)' }}>
+        <Link href="/">
+          <div className="flex items-center gap-3 w-full px-4 py-2.5 text-white/50 hover:text-white hover:bg-white/8 rounded-lg transition-all cursor-pointer text-sm font-medium">
+            <ExternalLink size={17} />
+            View Website
+          </div>
+        </Link>
+        <button
           onClick={logout}
-          className="flex items-center gap-3 w-full px-4 py-3 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all"
+          className="flex items-center gap-3 w-full px-4 py-2.5 text-white/50 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all text-sm font-medium"
         >
-          <LogOut size={20} />
+          <LogOut size={17} />
           Logout
         </button>
       </div>
@@ -55,10 +75,24 @@ export function AdminSidebar() {
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen" style={{ background: 'hsl(40,20%,96%)', fontFamily: 'Inter,sans-serif' }}>
       <AdminSidebar />
-      <main className="ml-64 p-8">
-        {children}
+      <main className="ml-64 min-h-screen">
+        {/* Top bar */}
+        <div className="h-14 bg-white border-b border-border flex items-center justify-between px-8 sticky top-0 z-30">
+          <div className="text-sm text-muted-foreground font-medium">
+            Star Computer's Academy — Admin Portal
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{ background: 'hsl(180,76%,22%)' }}>
+              A
+            </div>
+            <span className="text-sm font-semibold text-foreground">Admin</span>
+          </div>
+        </div>
+        <div className="p-8">
+          {children}
+        </div>
       </main>
     </div>
   );
