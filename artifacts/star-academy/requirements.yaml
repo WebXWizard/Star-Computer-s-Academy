@@ -1,0 +1,17 @@
+packages:
+  "framer-motion": "For smooth scroll and element reveal animations"
+  "react-hook-form": "For robust form handling"
+  "@hookform/resolvers": "For zod validation integration"
+  "date-fns": "For formatting dates in admin panel"
+
+images:
+  - path: "artifacts/star-academy/public/images/logo.png"
+    description: "Minimal modern logo for an educational computer academy named 'Star', incorporating a sleek star and digital/tech elements, deep royal blue and white theme on transparent background"
+    aspect_ratio: "1:1"
+  - path: "artifacts/star-academy/public/images/hero-abstract.png"
+    description: "Abstract geometric mesh background in deep royal blue and light blue with soft modern digital tech aesthetics, clean and professional"
+    aspect_ratio: "16:9"
+
+notes:
+  - Uses @workspace/api-client-react generated hooks for all API interactions
+  - Relies on existing shadcn UI components in src/components/ui/
