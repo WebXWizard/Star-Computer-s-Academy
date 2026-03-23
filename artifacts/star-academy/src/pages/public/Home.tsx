@@ -117,18 +117,6 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeUp} className="text-center mb-10">
-              {/* Academy branding above section */}
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <img
-                  src={`${import.meta.env.BASE_URL}images/logo.jpg`}
-                  alt="Star Computer's Academy"
-                  className="h-14 w-14 object-contain"
-                />
-                <div className="text-left">
-                  <p className="text-xl font-extrabold text-primary leading-tight">Star Computer's Academy</p>
-                  <p className="text-sm text-secondary font-semibold leading-tight">Sarsaundi, Uttar Pradesh</p>
-                </div>
-              </div>
               <h2 className="text-3xl font-extrabold text-foreground mb-2">Explore Our Academy</h2>
               <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
             </motion.div>
