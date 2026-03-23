@@ -44,7 +44,7 @@ export default function Home() {
       <section
         className="relative min-h-[88vh] flex items-center justify-center"
         style={{
-          background: 'linear-gradient(160deg, hsl(180,76%,18%) 0%, hsl(180,76%,26%) 100%)',
+          background: 'linear-gradient(160deg, #1e0a3c 0%, #3b1578 55%, #1a237e 100%)',
           paddingTop: '120px'
         }}
       >
@@ -61,8 +61,10 @@ export default function Home() {
               Welcome to<br />
               <span style={{ color: 'hsl(28,90%,68%)' }}>Star Computer's Academy</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-base sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: 'rgba(255,255,255,0.80)' }}>
-              Star Computer's Academy is a leading computer training institute offering basic computer courses for students, job seekers, and beginners. We provide practical training in MS Office (Word, Excel, PowerPoint), typing, internet skills, and CCC preparation. Our goal is to make students digitally skilled and job-ready through easy and hands-on learning methods. Join us today for quality computer education near you.
+            <motion.p variants={fadeUp} className="text-base sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: 'rgba(255,255,255,0.82)' }}>
+              Leading computer training institute in Sarsaundi offering MS Office, typing, internet & CCC courses.<br />
+              We provide practical, hands-on training to make students, job seekers & beginners digitally skilled.<br />
+              Join us today for quality, affordable computer education near you.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center">
               <Link href="/courses">
