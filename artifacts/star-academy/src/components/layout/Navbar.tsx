@@ -99,16 +99,12 @@ export function Navbar() {
       <nav className={`bg-white border-b border-border transition-all duration-300 ${isScrolled ? 'shadow-md py-2' : 'py-3'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center group">
               <img
                 src={`${import.meta.env.BASE_URL}images/logo.jpg`}
                 alt="Star Computer's Academy"
                 className="h-12 w-12 object-contain"
               />
-              <div>
-                <span className="font-bold text-xl text-primary block leading-tight tracking-tight" style={{fontFamily:'Inter,sans-serif'}}>Star Computer's</span>
-                <span className="font-semibold text-sm text-secondary block leading-tight tracking-wide">Academy</span>
-              </div>
             </Link>
 
             {/* Desktop Nav */}
