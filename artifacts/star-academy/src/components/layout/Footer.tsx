@@ -20,7 +20,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <div className="bg-white/10 p-1.5 rounded-lg">
-                <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Star Academy" className="h-9 w-9 object-contain" />
+                <img src={`${import.meta.env.BASE_URL}images/logo.jpg`} alt="Star Academy" className="h-9 w-9 object-contain" />
               </div>
               <div>
                 <span className="font-bold text-lg block leading-tight">Star Computer's</span>
