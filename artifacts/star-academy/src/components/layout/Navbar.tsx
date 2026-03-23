@@ -59,12 +59,10 @@ export function Navbar() {
     });
   };
 
-  const leftLinks = [
+  const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Courses', href: '/courses' },
-  ];
-  const rightLinks = [
     { name: 'Facilities', href: '/facilities' },
     { name: 'Testimonials', href: '/testimonials' },
     { name: 'Contact', href: '/contact' },
@@ -79,78 +77,61 @@ export function Navbar() {
     <div className="fixed top-0 w-full z-50">
       {/* Top Info Bar */}
       <div className={`text-white transition-all duration-300 ${isScrolled ? 'hidden' : 'block'}`} style={{ background: 'hsl(180,76%,15%)' }}>
-        <div className="max-w-7xl mx-auto px-4 py-1.5 flex flex-col sm:flex-row justify-between items-center text-xs gap-1 sm:gap-0">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm gap-1 sm:gap-0">
           <div className="flex items-center gap-4">
             <a href="mailto:starcomputeracademy@gmail.com" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
-              <Mail size={12} />
+              <Mail size={13} />
               <span>starcomputeracademy@gmail.com</span>
             </a>
-            <span className="hidden md:flex items-center gap-1.5 text-white/70">
-              <MapPin size={12} className="text-secondary" />
+            <span className="hidden md:flex items-center gap-1.5">
+              <MapPin size={13} className="text-secondary" />
               <span>X323+PRJ, Sarsaundi, UP 225001</span>
             </span>
           </div>
           <a href="tel:+919876543210" className="flex items-center gap-1.5 font-semibold hover:text-secondary transition-colors">
-            <Phone size={12} />
+            <Phone size={13} />
             <span>+91 9876543210</span>
           </a>
         </div>
       </div>
 
       {/* Main Navbar */}
-      <nav className={`bg-white border-b border-border transition-all duration-300 ${isScrolled ? 'shadow-md py-1.5' : 'py-2'}`}>
+      <nav className={`bg-white border-b border-border transition-all duration-300 ${isScrolled ? 'shadow-md py-2' : 'py-3'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            <Link href="/" className="flex items-center gap-3 group">
+              <img
+                src={`${import.meta.env.BASE_URL}images/logo.jpg`}
+                alt="Star Computer's Academy"
+                className="h-12 w-12 object-contain"
+              />
+              <div>
+                <span className="font-bold text-xl text-primary block leading-tight tracking-tight" style={{fontFamily:'Inter,sans-serif'}}>Star Computer's</span>
+                <span className="font-semibold text-sm text-secondary block leading-tight tracking-wide">Academy</span>
+              </div>
+            </Link>
 
-          {/* Desktop: 3-column centered layout */}
-          <div className="hidden lg:grid grid-cols-3 items-center gap-4">
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center gap-6">
+              <div className="flex gap-1">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200 ${
+                      isActive(link.href)
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-slate-600 hover:text-primary hover:bg-primary/5'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
 
-            {/* Left links */}
-            <div className="flex items-center gap-1 justify-start">
-              {leftLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200 ${
-                    isActive(link.href)
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-slate-600 hover:text-primary hover:bg-primary/5'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-
-            {/* Center Logo */}
-            <div className="flex justify-center">
-              <Link href="/" className="flex flex-col items-center group">
-                <img
-                  src={`${import.meta.env.BASE_URL}images/logo.jpg`}
-                  alt="Star Computer's Academy"
-                  className="h-16 w-16 object-contain"
-                />
-                <span className="text-xs font-bold text-primary leading-tight -mt-0.5 tracking-wide text-center">Star Computer's Academy</span>
-              </Link>
-            </div>
-
-            {/* Right links + Enroll */}
-            <div className="flex items-center gap-1 justify-end">
-              {rightLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200 ${
-                    isActive(link.href)
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-slate-600 hover:text-primary hover:bg-primary/5'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
               <Dialog open={modalOpen} onOpenChange={setModalOpen}>
                 <DialogTrigger asChild>
-                  <Button className="ml-2 font-semibold rounded-md px-4 bg-secondary hover:bg-secondary/90 text-white text-sm">
+                  <Button className="font-semibold rounded-md px-5 bg-secondary hover:bg-secondary/90 text-white text-sm">
                     Enroll Now
                   </Button>
                 </DialogTrigger>
@@ -196,18 +177,9 @@ export function Navbar() {
                 </DialogContent>
               </Dialog>
             </div>
-          </div>
 
-          {/* Mobile header */}
-          <div className="lg:hidden flex justify-between items-center">
-            <Link href="/" className="flex items-center gap-2">
-              <img src={`${import.meta.env.BASE_URL}images/logo.jpg`} alt="Star Academy" className="h-11 w-11 object-contain" />
-              <div>
-                <span className="font-bold text-base text-primary block leading-tight">Star Computer's</span>
-                <span className="font-semibold text-xs text-secondary block leading-tight">Academy</span>
-              </div>
-            </Link>
-            <button className="p-2 text-primary" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {/* Mobile Menu Button */}
+            <button className="lg:hidden p-2 text-primary" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
@@ -216,7 +188,7 @@ export function Navbar() {
         {/* Mobile Nav */}
         {mobileMenuOpen && (
           <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t py-3 px-4 flex flex-col gap-1">
-            {[...leftLinks, ...rightLinks].map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
