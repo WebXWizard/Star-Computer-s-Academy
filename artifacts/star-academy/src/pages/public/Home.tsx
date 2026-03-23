@@ -44,7 +44,7 @@ export default function Home() {
       <section
         className="relative min-h-[88vh] flex items-center justify-center"
         style={{
-          background: 'linear-gradient(160deg, #1e0a3c 0%, #3b1578 55%, #1a237e 100%)',
+          background: 'linear-gradient(135deg, #0b0f2e 0%, #1a237e 45%, #283593 75%, #1565c0 100%)',
           paddingTop: '120px'
         }}
       >
