@@ -22,6 +22,10 @@ export function Footer() {
               <div className="bg-white/10 p-1.5 rounded-lg">
                 <img src={`${import.meta.env.BASE_URL}images/logo.jpg`} alt="Star Academy" className="h-9 w-9 object-contain" />
               </div>
+              <div>
+                <span className="font-extrabold text-base block leading-tight text-white">Star Computer's Academy</span>
+                <span className="text-xs font-medium block leading-tight" style={{ color: 'hsl(28,90%,68%)' }}>Excellence in Computer Education</span>
+              </div>
             </div>
             <p className="text-white/60 text-sm leading-relaxed">
               Premier computer education institute in Sarsaundi, UP. Empowering students and job seekers with practical digital skills.

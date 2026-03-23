@@ -76,8 +76,11 @@ export default function Home() {
               Welcome to<br />
               <span style={{ color: '#ff9800' }}>Star Computer's Academy</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto font-medium" style={{ color: 'rgba(255,255,255,0.78)' }}>
-              Learn Computer Skills & Become Job Ready — Practical, affordable training for beginners, students & job seekers in Sarsaundi, UP.
+            <motion.p variants={fadeUp} className="text-base sm:text-lg mb-2 font-semibold tracking-wide uppercase" style={{ color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em' }}>
+              Sarsaundi's Premier Computer Training Institute
+            </motion.p>
+            <motion.p variants={fadeUp} className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto font-medium leading-relaxed" style={{ color: 'rgba(255,255,255,0.82)' }}>
+              From basic computer skills to government exam preparation — we offer practical, job-oriented courses designed for students, job seekers & working professionals in Sarsaundi, UP.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center">
               <Link href="/courses">
