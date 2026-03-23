@@ -42,29 +42,42 @@ export default function Home() {
 
       {/* Hero */}
       <section
-        className="relative min-h-[88vh] flex items-center justify-center"
+        className="relative min-h-[92vh] flex items-center justify-center overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, #0b0f2e 0%, #1a237e 45%, #283593 75%, #1565c0 100%)',
           paddingTop: '120px'
         }}
       >
-        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+        {/* Decorative circles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #e65100, transparent)' }} />
+          <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full opacity-8" style={{ background: 'radial-gradient(circle, #1565c0, transparent)' }} />
+          <div className="absolute top-1/3 right-1/4 w-64 h-64 rounded-full opacity-5 border-2 border-orange-400" />
+        </div>
+        {/* Background overlay image */}
+        <div
+          className="absolute inset-0 opacity-8"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&h=900&fit=crop')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <motion.div initial="hidden" animate="show" variants={stagger}>
             <motion.span
               variants={fadeUp}
               className="inline-block border text-sm font-semibold px-4 py-1.5 rounded-full mb-6"
-              style={{ color: 'hsl(28,90%,80%)', borderColor: 'hsl(28,75%,52%,0.5)', background: 'rgba(255,255,255,0.08)' }}
+              style={{ color: '#ffcc80', borderColor: '#ff980080', background: '#ff980015' }}
             >
               ✦ Admissions Open 2024–25
             </motion.span>
-            <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-5 leading-tight">
+            <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 leading-tight">
               Welcome to<br />
-              <span style={{ color: 'hsl(28,90%,68%)' }}>Star Computer's Academy</span>
+              <span style={{ color: '#ff9800' }}>Star Computer's Academy</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-base sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: 'rgba(255,255,255,0.82)' }}>
-              Leading computer training institute in Sarsaundi offering MS Office, typing, internet & CCC courses.<br />
-              We provide practical, hands-on training to make students, job seekers & beginners digitally skilled.<br />
-              Join us today for quality, affordable computer education near you.
+            <motion.p variants={fadeUp} className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto font-medium" style={{ color: 'rgba(255,255,255,0.78)' }}>
+              Learn Computer Skills & Become Job Ready — Practical, affordable training for beginners, students & job seekers in Sarsaundi, UP.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center">
               <Link href="/courses">
