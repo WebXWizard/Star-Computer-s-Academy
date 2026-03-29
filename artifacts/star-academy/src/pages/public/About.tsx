@@ -151,7 +151,9 @@ export default function About() {
               {team.map((member) => (
                 <motion.div key={member.name} variants={fadeUp}>
                   <div className="bg-white rounded-xl border border-border p-6 shadow-sm text-center h-full flex flex-col">
-                    <img src={member.img} alt={member.name} className="w-full h-64 rounded-xl mx-auto mb-4 object-cover object-top border border-border/60" />
+                    <div className="w-full h-80 rounded-xl mx-auto mb-4 border border-border/60 bg-muted/30 overflow-hidden flex items-center justify-center">
+                      <img src={member.img} alt={member.name} className="w-full h-full object-contain" />
+                    </div>
                     <h3 className="font-extrabold text-foreground text-base">{member.name}</h3>
                     <p className="text-sm font-semibold text-secondary mb-3">{member.role}</p>
                     <p className="text-sm text-muted-foreground italic flex-1">"{member.quote}"</p>
