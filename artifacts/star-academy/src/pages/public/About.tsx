@@ -29,13 +29,13 @@ export default function About() {
     {
       name: 'Miss. Anjali Gautam',
       role: 'Director - Star Computer\'s Academy',
-      img: `${import.meta.env.BASE_URL}images/team/director-anjali-gautam.jpeg`,
+      img: `${import.meta.env.BASE_URL}images/team/Director.jpeg`,
       quote: 'Education is the most powerful weapon which you can use to change the world. At Star Computer\'s Academy, our mission is to empower the youth of Sarsaundi with cutting-edge digital skills.',
     },
     {
       name: 'Mr. Shahe Alam',
       role: 'Head Instructor',
-      img: `${import.meta.env.BASE_URL}images/team/head-instructor-shahe-alam.jpg`,
+      img: `${import.meta.env.BASE_URL}images/team/HOI.jpeg`,
       quote: 'Our mission is to empower individuals with essential digital skills and advanced technical knowledge, shaping the future of technology learners.',
     },
     {
