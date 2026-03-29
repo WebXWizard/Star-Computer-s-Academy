@@ -29,13 +29,13 @@ export default function About() {
     {
       name: 'Miss. Anjali Gautam',
       role: 'Director - Star Computer\'s Academy',
-      img: 'https://ui-avatars.com/api/?name=Director&background=0f6b6b&color=fff&size=200&bold=true',
+      img: `${import.meta.env.BASE_URL}images/team/director-anjali-gautam.jpeg`,
       quote: 'Education is the most powerful weapon which you can use to change the world. At Star Computer\'s Academy, our mission is to empower the youth of Sarsaundi with cutting-edge digital skills.',
     },
     {
       name: 'Mr. Shahe Alam',
       role: 'Head Instructor',
-      img: 'https://ui-avatars.com/api/?name=Suraj+Yadav&background=e07d2c&color=fff&size=200&bold=true',
+      img: `${import.meta.env.BASE_URL}images/team/head-instructor-shahe-alam.jpg`,
       quote: 'Our mission is to empower individuals with essential digital skills and advanced technical knowledge, shaping the future of technology learners.',
     },
     {
@@ -151,7 +151,7 @@ export default function About() {
               {team.map((member) => (
                 <motion.div key={member.name} variants={fadeUp}>
                   <div className="bg-white rounded-xl border border-border p-6 shadow-sm text-center h-full flex flex-col">
-                    <img src={member.img} alt={member.name} className="w-20 h-20 rounded-full mx-auto mb-4 object-cover" />
+                    <img src={member.img} alt={member.name} className="w-full h-64 rounded-xl mx-auto mb-4 object-cover object-top border border-border/60" />
                     <h3 className="font-extrabold text-foreground text-base">{member.name}</h3>
                     <p className="text-sm font-semibold text-secondary mb-3">{member.role}</p>
                     <p className="text-sm text-muted-foreground italic flex-1">"{member.quote}"</p>
