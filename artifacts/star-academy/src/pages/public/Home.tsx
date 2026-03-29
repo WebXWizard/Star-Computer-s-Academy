@@ -1,6 +1,6 @@
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
-import { ArrowRight, Monitor, BookOpen, Award, Users, Clock, ChevronRight, Star } from 'lucide-react';
+import { ArrowRight, Monitor, BookOpen, Award, Users, Clock, ChevronRight, Star, Target, Heart, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
