@@ -1,6 +1,11 @@
 import { Router, type IRouter } from "express";
 import { db, enrollmentsTable, contactsTable, coursesTable, testimonialsTable } from "@workspace/db";
 import { count, eq } from "drizzle-orm";
+import {
+  fallbackStore,
+  isDatabaseUnavailable,
+  logFallbackMode,
+} from "../fallback-store";
 
 const router: IRouter = Router();
 
@@ -28,6 +33,10 @@ router.get("/stats", async (_req, res) => {
       totalTestimonials: Number(totalTestimonialsRow.count),
     });
   } catch (err) {
+    if (isDatabaseUnavailable(err)) {
+      logFallbackMode("admin.stats", err);
+      return res.json(fallbackStore.stats());
+    }
     res.status(500).json({ error: "Failed to fetch stats" });
   }
 });

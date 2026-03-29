@@ -1,6 +1,11 @@
 import { Router, type IRouter } from "express";
 import { db, testimonialsTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
+import {
+  fallbackStore,
+  isDatabaseUnavailable,
+  logFallbackMode,
+} from "../fallback-store";
 
 const router: IRouter = Router();
 
@@ -17,6 +22,16 @@ router.get("/", async (_req, res) => {
       }))
     );
   } catch (err) {
+    if (isDatabaseUnavailable(err)) {
+      logFallbackMode("testimonials.get", err);
+      const testimonials = fallbackStore.listTestimonials();
+      return res.json(
+        testimonials.map((t) => ({
+          ...t,
+          createdAt: t.createdAt.toISOString(),
+        })),
+      );
+    }
     res.status(500).json({ error: "Failed to fetch testimonials" });
   }
 });
@@ -33,6 +48,21 @@ router.post("/", async (req, res) => {
       .returning();
     res.status(201).json({ ...testimonial, createdAt: testimonial.createdAt.toISOString() });
   } catch (err) {
+    if (isDatabaseUnavailable(err)) {
+      logFallbackMode("testimonials.post", err);
+      const { studentName, course, review, rating, isActive } = req.body;
+      const testimonial = fallbackStore.createTestimonial({
+        studentName,
+        course,
+        review,
+        rating: Number(rating ?? 5),
+        isActive: isActive !== false,
+      });
+      return res.status(201).json({
+        ...testimonial,
+        createdAt: testimonial.createdAt.toISOString(),
+      });
+    }
     res.status(500).json({ error: "Failed to create testimonial" });
   }
 });
@@ -43,6 +73,12 @@ router.delete("/:id", async (req, res) => {
     await db.delete(testimonialsTable).where(eq(testimonialsTable.id, id));
     res.json({ success: true, message: "Testimonial deleted" });
   } catch (err) {
+    if (isDatabaseUnavailable(err)) {
+      logFallbackMode("testimonials.delete", err);
+      const id = parseInt(req.params.id);
+      fallbackStore.deleteTestimonial(id);
+      return res.json({ success: true, message: "Testimonial deleted" });
+    }
     res.status(500).json({ error: "Failed to delete testimonial" });
   }
 });

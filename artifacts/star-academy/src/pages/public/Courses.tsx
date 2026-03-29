@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
+import { asArray } from '@/lib/utils';
 
 const enrollmentSchema = z.object({
   name: z.string().min(2, "Name required"),
@@ -77,7 +78,8 @@ const fadeUp = {
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.1 } } };
 
 export default function Courses() {
-  const { data: courses = [], isLoading } = useListCourses();
+  const { data: coursesData = [], isLoading } = useListCourses();
+  const courses = asArray(coursesData);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState('');
   const createEnrollmentMutation = useCreateEnrollment();

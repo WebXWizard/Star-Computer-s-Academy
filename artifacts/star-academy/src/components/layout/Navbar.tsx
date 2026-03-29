@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { asArray } from '@/lib/utils';
 
 const enrollmentSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -29,7 +30,8 @@ export function Navbar() {
   const [location] = useLocation();
   const { toast } = useToast();
 
-  const { data: courses = [] } = useListCourses();
+  const { data: coursesData = [] } = useListCourses();
+  const courses = asArray(coursesData);
   const createEnrollmentMutation = useCreateEnrollment();
 
   const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm<EnrollmentForm>({

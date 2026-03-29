@@ -7,9 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
+import { asArray } from '@/lib/utils';
 
 export default function AdminContacts() {
-  const { data: contacts = [], isLoading } = useListContacts();
+  const { data: contactsData = [], isLoading } = useListContacts();
+  const contacts = asArray(contactsData);
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const [search, setSearch] = useState('');

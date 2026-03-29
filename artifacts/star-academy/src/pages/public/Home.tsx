@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { useListCourses, useListTestimonials } from '@workspace/api-client-react';
+import { asArray } from '@/lib/utils';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -25,8 +26,10 @@ const courseImages: Record<string, string> = {
 };
 
 export default function Home() {
-  const { data: courses = [] } = useListCourses();
-  const { data: testimonials = [] } = useListTestimonials();
+  const { data: coursesData = [] } = useListCourses();
+  const { data: testimonialsData = [] } = useListTestimonials();
+  const courses = asArray(coursesData);
+  const testimonials = asArray(testimonialsData);
 
   const quickLinks = [
     { label: 'About Us', href: '/about', icon: Users, desc: 'Learn about our academy & mission' },

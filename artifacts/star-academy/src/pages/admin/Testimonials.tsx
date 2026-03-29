@@ -10,11 +10,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { useForm } from 'react-hook-form';
+import { asArray } from '@/lib/utils';
 
 const avatarColors = ['0f6b6b', 'e07d2c', '2d6a8a', '8a2d6a', '6a8a2d'];
 
 export default function AdminTestimonials() {
-  const { data: testimonials = [], isLoading } = useListTestimonials();
+  const { data: testimonialsData = [], isLoading } = useListTestimonials();
+  const testimonials = asArray(testimonialsData);
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const [modalOpen, setModalOpen] = useState(false);
