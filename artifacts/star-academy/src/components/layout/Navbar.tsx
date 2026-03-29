@@ -81,18 +81,18 @@ export function Navbar() {
       <div className={`text-white transition-all duration-300 ${isScrolled ? 'hidden' : 'block'}`} style={{ background: 'hsl(180,76%,15%)' }}>
         <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm gap-1 sm:gap-0">
           <div className="flex items-center gap-4">
-            <a href="mailto:starcomputeracademy@gmail.com" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
+            <a href="mailto:staracademydu78@gmail.com" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
               <Mail size={13} />
-              <span>starcomputeracademy@gmail.com</span>
+              <span>staracademydu78@gmail.com</span>
             </a>
             <span className="hidden md:flex items-center gap-1.5">
               <MapPin size={13} className="text-secondary" />
-              <span>X323+PRJ, Sarsaundi, UP 225001</span>
+              <span>X323+PRJ, Sarsaundi, Uttar Pradesh 225001</span>
             </span>
           </div>
-          <a href="tel:+919876543210" className="flex items-center gap-1.5 font-semibold hover:text-secondary transition-colors">
+          <a href="tel:+917275540378" className="flex items-center gap-1.5 font-semibold hover:text-secondary transition-colors">
             <Phone size={13} />
-            <span>+91 9876543210</span>
+            <span>+91 72755 40378</span>
           </a>
         </div>
       </div>

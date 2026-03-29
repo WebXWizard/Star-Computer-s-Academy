@@ -57,15 +57,15 @@ export function Footer() {
             <ul className="space-y-3.5 text-sm text-white/60">
               <li className="flex gap-2.5 items-start">
                 <MapPin size={16} className="flex-shrink-0 mt-0.5" style={{ color: 'hsl(28,90%,68%)' }} />
-                <span>X323+PRJ, Sarsaundi,<br />Uttar Pradesh, 225001</span>
+                <span>X323+PRJ, Sarsaundi,<br />Uttar Pradesh 225001</span>
               </li>
               <li className="flex gap-2.5 items-center">
                 <Phone size={16} className="flex-shrink-0" style={{ color: 'hsl(28,90%,68%)' }} />
-                <a href="tel:+919876543210" className="hover:text-secondary transition-colors">+91 9876543210</a>
+                <a href="tel:+917275540378" className="hover:text-secondary transition-colors">+91 72755 40378</a>
               </li>
               <li className="flex gap-2.5 items-center">
                 <Mail size={16} className="flex-shrink-0" style={{ color: 'hsl(28,90%,68%)' }} />
-                <a href="mailto:starcomputeracademy@gmail.com" className="hover:text-secondary transition-colors text-xs">starcomputeracademy@gmail.com</a>
+                <a href="mailto:staracademydu78@gmail.com" className="hover:text-secondary transition-colors text-xs">staracademydu78@gmail.com</a>
               </li>
             </ul>
           </div>
@@ -83,7 +83,7 @@ export function Footer() {
               <a href="#" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-red-600 transition-colors" title="YouTube">
                 <Youtube size={17} />
               </a>
-              <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#25D366] transition-colors" title="WhatsApp">
+              <a href="https://wa.me/917275540378" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#25D366] transition-colors" title="WhatsApp">
                 <MessageCircle size={17} />
               </a>
             </div>

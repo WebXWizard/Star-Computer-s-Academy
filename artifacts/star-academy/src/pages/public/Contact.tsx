@@ -48,19 +48,19 @@ export default function Contact() {
     {
       icon: MapPin,
       title: 'Our Address',
-      lines: ['X323+PRJ, Sarsaundi', 'Uttar Pradesh, 225001', 'India'],
+      lines: ['X323+PRJ, Sarsaundi', 'Uttar Pradesh 225001', 'India'],
     },
     {
       icon: Phone,
       title: 'Phone Number',
-      lines: ['+91 9876543210'],
-      href: 'tel:+919876543210',
+      lines: ['+91 72755 40378'],
+      href: 'tel:+917275540378',
     },
     {
       icon: Mail,
       title: 'Email Address',
-      lines: ['starcomputeracademy@gmail.com'],
-      href: 'mailto:starcomputeracademy@gmail.com',
+      lines: ['staracademydu78@gmail.com'],
+      href: 'mailto:staracademydu78@gmail.com',
     },
     {
       icon: Clock,
@@ -117,7 +117,7 @@ export default function Contact() {
           {/* WhatsApp CTA */}
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/917275540378"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
@@ -180,9 +180,9 @@ export default function Contact() {
               </div>
               <div className="bg-primary/10 rounded-xl border border-primary/20 p-4">
                 <p className="text-xs font-semibold text-primary mb-1">📍 Find Us</p>
-                <p className="text-sm text-foreground font-medium">X323+PRJ, Sarsaundi, Uttar Pradesh, 225001</p>
+                <p className="text-sm text-foreground font-medium">X323+PRJ, Sarsaundi, Uttar Pradesh 225001</p>
                 <a
-                  href="https://maps.google.com/?q=Sarsaundi,Uttar+Pradesh+225001"
+                  href="https://maps.google.com/?q=X323%2BPRJ%2C+Sarsaundi%2C+Uttar+Pradesh+225001"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-secondary font-semibold mt-2 block hover:underline"

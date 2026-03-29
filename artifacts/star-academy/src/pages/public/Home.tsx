@@ -31,6 +31,13 @@ export default function Home() {
   const courses = asArray(coursesData);
   const testimonials = asArray(testimonialsData);
 
+    const values = [
+    { icon: Target, title: 'Practical Learning', desc: 'Every course is designed with hands-on exercises so students learn by doing, not just listening.' },
+    { icon: Heart, title: 'Affordable Education', desc: 'We believe quality computer education should be accessible to everyone, regardless of background.' },
+    { icon: Eye, title: 'Job-Oriented Focus', desc: 'Our curriculum is aligned with market demands so students are ready for employment from day one.' },
+    { icon: Award, title: 'Certified Trainers', desc: 'Our instructors are experienced professionals who bring real-world knowledge to every class.' },
+  ];
+ 
   const quickLinks = [
     { label: 'About Us', href: '/about', icon: Users, desc: 'Learn about our academy & mission' },
     { label: 'Our Courses', href: '/courses', icon: BookOpen, desc: 'Explore all computer courses' },
@@ -73,7 +80,7 @@ export default function Home() {
               className="inline-block border text-sm font-semibold px-4 py-1.5 rounded-full mb-6"
               style={{ color: '#ffcc80', borderColor: '#ff980080', background: '#ff980015' }}
             >
-              ✦ Admissions Open 2024–25
+              ✦ Admissions Open 2026-27
             </motion.span>
             <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 leading-tight">
               Welcome to<br />
@@ -239,6 +246,35 @@ export default function Home() {
         </section>
       )}
 
+
+       {/* Our Values */}
+            <section className="py-16 bg-muted/30">
+              <div className="max-w-6xl mx-auto px-4">
+                <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
+                  <motion.div variants={fadeUp} className="text-center mb-10">
+                    <h2 className="text-3xl font-extrabold text-foreground mb-2">Our Core Values</h2>
+                    <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
+                  </motion.div>
+                  <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    {values.map((v) => {
+                      const Icon = v.icon;
+                      return (
+                        <motion.div key={v.title} variants={fadeUp}>
+                          <div className="bg-white rounded-xl border border-border p-6 shadow-sm h-full">
+                            <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                              <Icon size={22} className="text-primary" />
+                            </div>
+                            <h3 className="font-bold text-foreground mb-2">{v.title}</h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </motion.div>
+                </motion.div>
+              </div>
+            </section>
+
       {/* CTA Banner */}
       <section className="py-14" style={{ background: 'linear-gradient(135deg, hsl(180,76%,18%) 0%, hsl(180,76%,26%) 100%)' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
@@ -261,7 +297,7 @@ export default function Home() {
 
       {/* Floating WhatsApp */}
       <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/917275540378"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110"
