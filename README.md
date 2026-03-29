@@ -1,92 +1,181 @@
-# Star Academy Training (Simple Run Guide)
+# Star Computer's Academy
 
-This project has 2 parts:
-1. Frontend (website)
-2. Backend (API + database)
+A full-stack academy website and admin panel for managing courses, enrollments, contacts, and testimonials.
 
-You must run both.
+This repository is a pnpm monorepo with:
+- Public website (React + Vite)
+- Admin panel (inside the same frontend app)
+- Backend API (Express + TypeScript)
+- Database layer (PostgreSQL + Drizzle ORM)
 
-## What you need first
-- Node.js 24
-- pnpm
-- PostgreSQL running (local or cloud)
+## What This App Does
 
-## 1) Open terminal in project folder
+### Public side
+- Shows courses, facilities, testimonials, and contact pages
+- Lets users submit enrollments and contact forms
+
+### Admin side
+- Login to admin dashboard
+- Manage courses
+- Manage enrollments (status update + delete)
+- Manage contact messages
+- Manage testimonials
+- View dashboard stats
+
+## Tech Stack
+
+### Frontend
+- React
+- Vite
+- TypeScript
+- Tailwind CSS
+- React Query
+- shadcn/ui components
+
+### Backend
+- Node.js
+- Express 5
+- TypeScript
+
+### Database
+- PostgreSQL
+- Drizzle ORM
+- drizzle-kit
+
+### Monorepo tooling
+- pnpm workspaces
+
+## Project Structure
+
+```text
+artifacts/
+  star-academy/      # Frontend app (public + admin UI)
+  api-server/        # Backend API
+lib/
+  db/                # Drizzle schema + DB client
+  api-spec/          # OpenAPI spec
+  api-client-react/  # Generated API client for frontend
+  api-zod/           # Generated Zod types
+```
+
+## Environment Variables
+
+Create a `.env` file in repo root (or set env vars in terminal):
+
+```env
+DATABASE_URL=postgresql://DB_USER:DB_PASSWORD@DB_HOST:5432/DB_NAME?sslmode=disable
+```
+
+Backend also needs:
+- `PORT` (example: `5000`)
+
+Frontend also needs:
+- `PORT` (example: `5173`)
+- `BASE_PATH` (use `/`)
+- Optional: `API_TARGET` (default `http://localhost:5000`)
+
+## Local Run (Windows PowerShell)
+
+### 1) Open repo
 ```powershell
 cd C:\Users\hp\Downloads\Star-Academy-Training
 ```
 
-## 2) Install packages
+### 2) Install dependencies
 ```powershell
 pnpm.cmd install
 ```
 
-## 3) Add database URL in `.env`
-File: `.env`
-
-Example for local PostgreSQL:
-```env
-DATABASE_URL=postgresql://postgres:password@localhost:5432/heliumdb?sslmode=disable
-```
-
-Important:
-- `@helium` host works on Replit internal network.
-- On your local Windows machine, use `localhost` (or a real public DB host).
-
-## 4) Create/update database tables
+### 3) Push DB schema (when PostgreSQL is available)
 ```powershell
-$env:DATABASE_URL="postgresql://postgres:password@localhost:5432/heliumdb?sslmode=disable"
+$env:DATABASE_URL="postgresql://DB_USER:DB_PASSWORD@DB_HOST:5432/DB_NAME?sslmode=disable"
 pnpm.cmd --filter @workspace/db push
 ```
 
-## 5) Run backend (Terminal 1)
+### 4) Run backend (Terminal 1)
 ```powershell
 $env:PORT="5000"
-$env:DATABASE_URL="postgresql://postgres:password@localhost:5432/heliumdb?sslmode=disable"
+$env:DATABASE_URL="postgresql://DB_USER:DB_PASSWORD@DB_HOST:5432/DB_NAME?sslmode=disable"
 pnpm.cmd --filter @workspace/api-server exec tsx ./src/index.ts
 ```
 
-Backend check:
-```powershell
-Invoke-WebRequest http://localhost:5000/api/healthz -UseBasicParsing
-```
-
-## 6) Run frontend (Terminal 2)
+### 5) Run frontend (Terminal 2)
 ```powershell
 $env:PORT="5173"
 $env:BASE_PATH="/"
+$env:API_TARGET="http://localhost:5000"
 pnpm.cmd --filter @workspace/star-academy dev
 ```
 
-Open website:
-- http://localhost:5173
+Open:
+- `http://localhost:5173`
+- Admin: `http://localhost:5173/admin`
 
-## 7) Admin panel login
-- URL: http://localhost:5173/admin
-- Username: `admin`
-- Password: `admin123`
+## API Behavior in Local Development
 
-## If data is not loading
-1. Check backend is running on port `5000`.
-2. Check PostgreSQL is running on port `5432`.
-3. Check `DATABASE_URL` host is reachable.
-4. Run DB push again:
+- Frontend `/api/*` requests are proxied to backend using Vite proxy.
+- Proxy target is `API_TARGET` (default: `http://localhost:5000`).
+
+## Database Fallback Mode (Local Dev Safety)
+
+If PostgreSQL is unreachable, backend automatically uses an in-memory fallback store.
+
+This helps you continue UI/admin development without blocking.
+
+Important:
+- Data is temporary in fallback mode
+- Data resets when backend restarts
+- Use real PostgreSQL for persistent production data
+
+## Common Commands
+
 ```powershell
+# Install all dependencies
+pnpm.cmd install
+
+# Typecheck workspace
+pnpm.cmd run typecheck
+
+# Backend only
+pnpm.cmd --filter @workspace/api-server exec tsx ./src/index.ts
+
+# Frontend only
+pnpm.cmd --filter @workspace/star-academy dev
+
+# Push DB schema
 pnpm.cmd --filter @workspace/db push
 ```
 
-## Development fallback mode (new)
-If PostgreSQL is down/unreachable, backend now uses an in-memory fallback automatically.
+## Troubleshooting
 
-This means:
-- Public pages still show course/testimonial data.
-- Admin panel APIs still work.
-- Data is temporary and resets when backend restarts.
+### `Failed to fetch courses`
+Usually backend cannot reach database.
 
-## Quick one-time checklist
-- [ ] `pnpm.cmd install` completed
-- [ ] PostgreSQL started
-- [ ] `.env` has correct `DATABASE_URL`
-- [ ] `pnpm.cmd --filter @workspace/db push` completed
-- [ ] Backend running on `5000`
-- [ ] Frontend running on `5173`
+Check:
+1. PostgreSQL is running
+2. `DATABASE_URL` host/port/user/password are correct
+3. Backend is running on port `5000`
+4. Frontend `API_TARGET` points to backend
+
+### `pnpm` blocked in PowerShell
+Use `pnpm.cmd` instead of `pnpm`.
+
+### Port already in use
+Stop existing process on that port, then run again.
+
+## Security Notes
+
+- Do not commit real credentials in `.env`.
+- `.env` is ignored by git in this repo.
+- Use placeholders in documentation and screenshots.
+- Change demo/default admin credentials before production use.
+
+## Deploy Notes
+
+- Frontend and backend can be deployed separately.
+- Frontend should forward `/api/*` to backend domain.
+- Backend requires a reachable PostgreSQL instance.
+
+---
+
+For extra setup detail, see: [APP_SETUP_GUIDE.md](./APP_SETUP_GUIDE.md)
