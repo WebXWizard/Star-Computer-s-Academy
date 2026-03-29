@@ -27,13 +27,13 @@ export default function About() {
 
   const team = [
     {
-      name: 'Director',
-      role: 'Head of Academy',
+      name: 'Miss. Anjali Gautam',
+      role: 'Director - Star Computer\'s Academy',
       img: 'https://ui-avatars.com/api/?name=Director&background=0f6b6b&color=fff&size=200&bold=true',
       quote: 'Education is the most powerful weapon which you can use to change the world. At Star Computer\'s Academy, our mission is to empower the youth of Sarsaundi with cutting-edge digital skills.',
     },
     {
-      name: 'Suraj Yadav',
+      name: 'Mr. Shahe Alam',
       role: 'Head Instructor',
       img: 'https://ui-avatars.com/api/?name=Suraj+Yadav&background=e07d2c&color=fff&size=200&bold=true',
       quote: 'Our mission is to empower individuals with essential digital skills and advanced technical knowledge, shaping the future of technology learners.',

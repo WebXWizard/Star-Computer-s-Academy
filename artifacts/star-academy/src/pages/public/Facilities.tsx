@@ -124,18 +124,24 @@ export default function Facilities() {
               <h2 className="text-3xl font-extrabold text-foreground mb-2">Inside Our Academy</h2>
               <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
             </motion.div>
-            <motion.div variants={stagger} className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {[
-                'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=280&fit=crop',
-                'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=280&fit=crop',
-                'https://images.unsplash.com/photo-1593697821028-7cc59cfd7399?w=400&h=280&fit=crop',
-                'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=280&fit=crop',
-                'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=280&fit=crop',
-                'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=280&fit=crop',
-              ].map((src, i) => (
+                {
+                  src: `${import.meta.env.BASE_URL}images/facilities/lab-computers.jpeg`,
+                  alt: 'Modern computer lab with individual workstations'
+                },
+                {
+                  src: `${import.meta.env.BASE_URL}images/facilities/classroom-seating.jpeg`,
+                  alt: 'Classroom seating area for theory sessions'
+                },
+                {
+                  src: `${import.meta.env.BASE_URL}images/facilities/academy-interior.jpeg`,
+                  alt: 'Academy interior and front office area'
+                },
+              ].map((photo, i) => (
                 <motion.div key={i} variants={fadeUp}>
                   <div className="rounded-xl overflow-hidden border border-border shadow-sm aspect-[4/3]">
-                    <img src={src} alt={`Lab ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                    <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                   </div>
                 </motion.div>
               ))}

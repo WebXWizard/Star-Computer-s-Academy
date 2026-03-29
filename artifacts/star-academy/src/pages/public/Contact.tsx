@@ -169,7 +169,7 @@ export default function Contact() {
               <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden flex-1" style={{ minHeight: '360px' }}>
                 <iframe
                   title="Star Computer's Academy Location"
-                  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3551.9!2d81.578!3d26.848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDUwJzUzLjAiTiA4McKwMzQnNDAuOCJF!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin"
+                  src="https://maps.google.com/maps?q=X323%2BPRJ%2C%20Sarsaundi%2C%20Uttar%20Pradesh%20225001%2C%20India&t=&z=16&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0, minHeight: '360px' }}
