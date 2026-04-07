@@ -2,6 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
   "installCommand": "pnpm install",
-  "buildCommand": "pnpm --filter @workspace/star-academy build",
+  "buildCommand": "pnpm --filter @workspace/api-server build && pnpm --filter @workspace/star-academy build",
   "outputDirectory": "artifacts/star-academy/dist/public"
 }

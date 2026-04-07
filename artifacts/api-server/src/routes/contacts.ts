@@ -5,7 +5,7 @@ import {
   fallbackStore,
   isDatabaseUnavailable,
   logFallbackMode,
-} from "../fallback-store";
+} from "../fallback-store.js";
 
 const router: IRouter = Router();
 
