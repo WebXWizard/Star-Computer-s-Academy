@@ -3,5 +3,14 @@
   "framework": "vite",
   "installCommand": "pnpm install",
   "buildCommand": "pnpm --filter @workspace/api-server build && pnpm --filter @workspace/star-academy build",
-  "outputDirectory": "artifacts/star-academy/dist/public"
+  "outputDirectory": "artifacts/star-academy/dist/public",
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
