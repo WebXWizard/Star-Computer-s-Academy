@@ -68,7 +68,7 @@ export default function Facilities() {
       <Navbar />
 
       {/* Header */}
-      <section className="pt-36 pb-14" style={{ background: 'linear-gradient(135deg, hsl(180,76%,15%) 0%, hsl(180,76%,23%) 100%)' }}>
+      <section className="star-animated-hero pt-36 pb-14" style={{ background: 'linear-gradient(135deg, hsl(180,76%,15%) 0%, hsl(180,76%,23%) 100%)' }}>
         <div className="max-w-5xl mx-auto px-4 text-center">
           <motion.div initial="hidden" animate="show" variants={stagger}>
             <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'hsl(28,90%,70%)' }}>Our Facilities</motion.p>

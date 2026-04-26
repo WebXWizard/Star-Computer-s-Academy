@@ -53,7 +53,7 @@ export default function Home() {
 
       {/* Hero */}
       <section
-        className="relative min-h-[92vh] flex items-center justify-center overflow-hidden"
+        className="star-animated-hero relative min-h-[92vh] flex items-center justify-center overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, #0b0f2e 0%, #1a237e 45%, #283593 75%, #1565c0 100%)',
           paddingTop: '120px'
@@ -67,7 +67,7 @@ export default function Home() {
         </div>
         {/* Background overlay image */}
         <div
-          className="absolute inset-0 opacity-8"
+          className="star-hero-photo absolute inset-0 opacity-8"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&h=900&fit=crop')`,
             backgroundSize: 'cover',
@@ -107,7 +107,7 @@ export default function Home() {
       </section>
 
       {/* Stats Bar */}
-      <section className="bg-secondary py-6">
+      <section className="star-moving-band bg-secondary py-6">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-white">
           {[
             { number: '500+', label: 'Students Taught' },
@@ -277,7 +277,7 @@ export default function Home() {
             </section>
 
       {/* CTA Banner */}
-      <section className="py-14" style={{ background: 'linear-gradient(135deg, hsl(180,76%,18%) 0%, hsl(180,76%,26%) 100%)' }}>
+      <section className="star-animated-hero py-14" style={{ background: 'linear-gradient(135deg, hsl(180,76%,18%) 0%, hsl(180,76%,26%) 100%)' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-extrabold text-white mb-3">Ready to Start Your Digital Journey?</h2>
           <p className="text-white/80 mb-7 text-base">Join hundreds of students who transformed their careers with Star Computer's Academy.</p>

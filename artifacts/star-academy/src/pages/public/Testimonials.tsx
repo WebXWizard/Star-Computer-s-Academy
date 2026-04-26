@@ -26,7 +26,7 @@ export default function Testimonials() {
       <Navbar />
 
       {/* Header */}
-      <section className="pt-36 pb-14" style={{ background: 'linear-gradient(135deg, hsl(180,76%,15%) 0%, hsl(180,76%,23%) 100%)' }}>
+      <section className="star-animated-hero pt-36 pb-14" style={{ background: 'linear-gradient(135deg, hsl(180,76%,15%) 0%, hsl(180,76%,23%) 100%)' }}>
         <div className="max-w-5xl mx-auto px-4 text-center">
           <motion.div initial="hidden" animate="show" variants={stagger}>
             <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'hsl(28,90%,70%)' }}>Testimonials</motion.p>
@@ -41,7 +41,7 @@ export default function Testimonials() {
       </section>
 
       {/* Stats */}
-      <section className="bg-secondary py-6">
+      <section className="star-moving-band bg-secondary py-6">
         <div className="max-w-4xl mx-auto px-4 grid grid-cols-3 gap-4 text-center text-white">
           <div>
             <div className="text-3xl font-extrabold">500+</div>

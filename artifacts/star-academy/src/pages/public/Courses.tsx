@@ -198,7 +198,7 @@ export default function Courses() {
 
       {/* Header */}
       <section
-        className="pt-36 pb-14"
+        className="star-animated-hero pt-36 pb-14"
         style={{
           background:
             "linear-gradient(135deg, hsl(180,76%,15%) 0%, hsl(180,76%,23%) 100%)",
