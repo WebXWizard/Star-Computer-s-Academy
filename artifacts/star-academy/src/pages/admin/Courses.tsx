@@ -9,9 +9,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { useForm } from 'react-hook-form';
+import { asArray } from '@/lib/utils';
 
 export default function AdminCourses() {
-  const { data: courses = [], isLoading } = useListCourses();
+  const { data: coursesData = [], isLoading } = useListCourses();
+  const courses = asArray(coursesData);
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const [modalOpen, setModalOpen] = useState(false);

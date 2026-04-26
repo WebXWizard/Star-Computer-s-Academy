@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { useListTestimonials } from '@workspace/api-client-react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
+import { asArray } from '@/lib/utils';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -15,7 +16,8 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 const avatarColors = ['0f6b6b', 'e07d2c', '2d6a8a', '8a2d6a', '6a8a2d', '2d8a6a'];
 
 export default function Testimonials() {
-  const { data: testimonials = [], isLoading } = useListTestimonials();
+  const { data: testimonialsData = [], isLoading } = useListTestimonials();
+  const testimonials = asArray(testimonialsData);
 
   const activeTestimonials = testimonials.filter(t => t.isActive);
 

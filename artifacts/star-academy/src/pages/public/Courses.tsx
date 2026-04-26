@@ -16,9 +16,9 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
@@ -33,6 +33,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
+import { asArray } from "@/lib/utils";
 
 const enrollmentSchema = z.object({
   name: z.string().min(2, "Name required"),
@@ -88,6 +89,44 @@ const courseMeta: Record<
   },
 };
 
+const courseDetails: Record<string, string[]> = {
+  "Basic Computer Course": [
+    "Introduction to computers & operating systems",
+    "File management and folder organization",
+    "Hardware components and peripherals",
+    "Keyboard shortcuts & efficiency tips",
+    "Basic troubleshooting skills",
+  ],
+  "MS Word, Excel & PowerPoint": [
+    "MS Word - formatting, tables, mail merge",
+    "MS Excel - formulas, charts, pivot tables",
+    "MS PowerPoint - professional presentations",
+    "Real-world projects and assignments",
+    "Tips for faster productivity",
+  ],
+  "Typing Classes (Hindi & English)": [
+    "Proper finger placement on keyboard",
+    "Hindi typing using Mangal/Krutidev font",
+    "English typing from 20 to 50+ WPM",
+    "Daily speed and accuracy practice",
+    "Preparation for govt typing exams",
+  ],
+  "CCC Preparation": [
+    "Complete NIELIT CCC syllabus coverage",
+    "Introduction to computers & OS",
+    "MS Office basics (Word, Excel, PPT)",
+    "Internet, email, and digital payments",
+    "Mock tests and previous year papers",
+  ],
+  "Internet & Email Training": [
+    "Safe and efficient internet browsing",
+    "Professional email writing and management",
+    "Online forms, transactions, and banking",
+    "Google Workspace tools (Docs, Drive)",
+    "Social media and online safety",
+  ],
+};
+
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
@@ -98,7 +137,8 @@ const stagger = {
 };
 
 export default function Courses() {
-  const { data: courses = [], isLoading } = useListCourses();
+  const { data: coursesData = [], isLoading } = useListCourses();
+  const courses = asArray(coursesData);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState("");
   const createEnrollmentMutation = useCreateEnrollment();

@@ -12,12 +12,7 @@ const fadeUp = {
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.1 } } };
 
 export default function About() {
-  const values = [
-    { icon: Target, title: 'Practical Learning', desc: 'Every course is designed with hands-on exercises so students learn by doing, not just listening.' },
-    { icon: Heart, title: 'Affordable Education', desc: 'We believe quality computer education should be accessible to everyone, regardless of background.' },
-    { icon: Eye, title: 'Job-Oriented Focus', desc: 'Our curriculum is aligned with market demands so students are ready for employment from day one.' },
-    { icon: Award, title: 'Certified Trainers', desc: 'Our instructors are experienced professionals who bring real-world knowledge to every class.' },
-  ];
+
 
   const highlights = [
     'Expert instructor with years of industry experience',
@@ -32,15 +27,15 @@ export default function About() {
 
   const team = [
     {
-      name: 'Director',
-      role: 'Head of Academy',
-      img: 'https://ui-avatars.com/api/?name=Director&background=0f6b6b&color=fff&size=200&bold=true',
+      name: 'Miss. Anjali Gautam',
+      role: 'Director - Star Computer\'s Academy',
+      img: `${import.meta.env.BASE_URL}images/team/Director.jpeg`,
       quote: 'Education is the most powerful weapon which you can use to change the world. At Star Computer\'s Academy, our mission is to empower the youth of Sarsaundi with cutting-edge digital skills.',
     },
     {
-      name: 'Suraj Yadav',
+      name: 'Mr. Shahe Alam',
       role: 'Head Instructor',
-      img: 'https://ui-avatars.com/api/?name=Suraj+Yadav&background=e07d2c&color=fff&size=200&bold=true',
+      img: `${import.meta.env.BASE_URL}images/team/HOI.jpeg`,
       quote: 'Our mission is to empower individuals with essential digital skills and advanced technical knowledge, shaping the future of technology learners.',
     },
     {
@@ -121,33 +116,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Our Values */}
-      <section className="py-16 bg-muted/30">
-        <div className="max-w-6xl mx-auto px-4">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className="text-center mb-10">
-              <h2 className="text-3xl font-extrabold text-foreground mb-2">Our Core Values</h2>
-              <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
-            </motion.div>
-            <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {values.map((v) => {
-                const Icon = v.icon;
-                return (
-                  <motion.div key={v.title} variants={fadeUp}>
-                    <div className="bg-white rounded-xl border border-border p-6 shadow-sm h-full">
-                      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                        <Icon size={22} className="text-primary" />
-                      </div>
-                      <h3 className="font-bold text-foreground mb-2">{v.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+     
 
       {/* Highlights */}
       <section className="py-16 bg-background">
@@ -182,7 +151,9 @@ export default function About() {
               {team.map((member) => (
                 <motion.div key={member.name} variants={fadeUp}>
                   <div className="bg-white rounded-xl border border-border p-6 shadow-sm text-center h-full flex flex-col">
-                    <img src={member.img} alt={member.name} className="w-20 h-20 rounded-full mx-auto mb-4 object-cover" />
+                    <div className="w-full h-80 rounded-xl mx-auto mb-4 border border-border/60 bg-muted/30 overflow-hidden flex items-center justify-center">
+                      <img src={member.img} alt={member.name} className="w-full h-full object-contain" />
+                    </div>
                     <h3 className="font-extrabold text-foreground text-base">{member.name}</h3>
                     <p className="text-sm font-semibold text-secondary mb-3">{member.role}</p>
                     <p className="text-sm text-muted-foreground italic flex-1">"{member.quote}"</p>

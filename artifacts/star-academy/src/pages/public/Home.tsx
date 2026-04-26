@@ -1,10 +1,11 @@
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
-import { ArrowRight, Monitor, BookOpen, Award, Users, Clock, ChevronRight, Star } from 'lucide-react';
+import { ArrowRight, Monitor, BookOpen, Award, Users, Clock, ChevronRight, Star, Target, Heart, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { useListCourses, useListTestimonials } from '@workspace/api-client-react';
+import { asArray } from '@/lib/utils';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -25,9 +26,18 @@ const courseImages: Record<string, string> = {
 };
 
 export default function Home() {
-  const { data: courses = [] } = useListCourses();
-  const { data: testimonials = [] } = useListTestimonials();
+  const { data: coursesData = [] } = useListCourses();
+  const { data: testimonialsData = [] } = useListTestimonials();
+  const courses = asArray(coursesData);
+  const testimonials = asArray(testimonialsData);
 
+    const values = [
+    { icon: Target, title: 'Practical Learning', desc: 'Every course is designed with hands-on exercises so students learn by doing, not just listening.' },
+    { icon: Heart, title: 'Affordable Education', desc: 'We believe quality computer education should be accessible to everyone, regardless of background.' },
+    { icon: Eye, title: 'Job-Oriented Focus', desc: 'Our curriculum is aligned with market demands so students are ready for employment from day one.' },
+    { icon: Award, title: 'Certified Trainers', desc: 'Our instructors are experienced professionals who bring real-world knowledge to every class.' },
+  ];
+ 
   const quickLinks = [
     { label: 'About Us', href: '/about', icon: Users, desc: 'Learn about our academy & mission' },
     { label: 'Our Courses', href: '/courses', icon: BookOpen, desc: 'Explore all computer courses' },
@@ -42,14 +52,21 @@ export default function Home() {
 
       {/* Hero */}
       <section
-        className="relative min-h-[92vh] flex items-center justify-center"
+        className="relative min-h-[92vh] flex items-center justify-center overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, hsl(180,76%,15%) 0%, hsl(180,76%,25%) 50%, hsl(28,75%,45%) 100%)',
+          background: 'linear-gradient(135deg, #0b0f2e 0%, #1a237e 45%, #283593 75%, #1565c0 100%)',
           paddingTop: '120px'
         }}
       >
+        {/* Decorative circles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #e65100, transparent)' }} />
+          <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full opacity-8" style={{ background: 'radial-gradient(circle, #1565c0, transparent)' }} />
+          <div className="absolute top-1/3 right-1/4 w-64 h-64 rounded-full opacity-5 border-2 border-orange-400" />
+        </div>
+        {/* Background overlay image */}
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-8"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&h=900&fit=crop')`,
             backgroundSize: 'cover',
@@ -60,26 +77,26 @@ export default function Home() {
           <motion.div initial="hidden" animate="show" variants={stagger}>
             <motion.span
               variants={fadeUp}
-              className="inline-block bg-secondary/20 border border-secondary/40 text-secondary-foreground text-sm font-semibold px-4 py-1.5 rounded-full mb-6"
-              style={{ color: 'hsl(28,75%,90%)' }}
+              className="inline-block border text-sm font-semibold px-4 py-1.5 rounded-full mb-6"
+              style={{ color: '#ffcc80', borderColor: '#ff980080', background: '#ff980015' }}
             >
-              ✦ Admissions Open 2024–25
+              ✦ Admissions Open 2026-27
             </motion.span>
             <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 leading-tight">
               Welcome to<br />
-              <span style={{ color: 'hsl(28,90%,68%)' }}>Star Computer's Academy</span>
+              <span style={{ color: '#ff9800' }}>Star Computer's Academy</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl mx-auto font-medium">
+            <motion.p variants={fadeUp} className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto font-medium" style={{ color: 'rgba(255,255,255,0.78)' }}>
               Learn Computer Skills & Become Job Ready — Practical, affordable training for beginners, students & job seekers in Sarsaundi, UP.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center">
               <Link href="/courses">
-                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold px-8 py-3 rounded-md shadow-lg text-base">
+                <Button size="lg" className="font-bold px-8 py-3 rounded-md shadow-lg text-base text-white" style={{ background: '#e65100' }}>
                   Explore Courses <ArrowRight size={18} className="ml-2" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/40 font-bold px-8 py-3 rounded-md text-base">
+                <Button size="lg" variant="outline" className="font-bold px-8 py-3 rounded-md text-base text-white border-white/40 bg-white/10 hover:bg-white/20">
                   Contact Us
                 </Button>
               </Link>
@@ -229,6 +246,35 @@ export default function Home() {
         </section>
       )}
 
+
+       {/* Our Values */}
+            <section className="py-16 bg-muted/30">
+              <div className="max-w-6xl mx-auto px-4">
+                <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
+                  <motion.div variants={fadeUp} className="text-center mb-10">
+                    <h2 className="text-3xl font-extrabold text-foreground mb-2">Our Core Values</h2>
+                    <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
+                  </motion.div>
+                  <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    {values.map((v) => {
+                      const Icon = v.icon;
+                      return (
+                        <motion.div key={v.title} variants={fadeUp}>
+                          <div className="bg-white rounded-xl border border-border p-6 shadow-sm h-full">
+                            <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                              <Icon size={22} className="text-primary" />
+                            </div>
+                            <h3 className="font-bold text-foreground mb-2">{v.title}</h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </motion.div>
+                </motion.div>
+              </div>
+            </section>
+
       {/* CTA Banner */}
       <section className="py-14" style={{ background: 'linear-gradient(135deg, hsl(180,76%,18%) 0%, hsl(180,76%,26%) 100%)' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
@@ -251,7 +297,7 @@ export default function Home() {
 
       {/* Floating WhatsApp */}
       <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/917275540378"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110"

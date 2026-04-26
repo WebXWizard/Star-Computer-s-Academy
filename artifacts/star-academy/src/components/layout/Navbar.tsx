@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { asArray } from '@/lib/utils';
 
 const enrollmentSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -29,7 +30,8 @@ export function Navbar() {
   const [location] = useLocation();
   const { toast } = useToast();
 
-  const { data: courses = [] } = useListCourses();
+  const { data: coursesData = [] } = useListCourses();
+  const courses = asArray(coursesData);
   const createEnrollmentMutation = useCreateEnrollment();
 
   const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm<EnrollmentForm>({
@@ -76,21 +78,21 @@ export function Navbar() {
   return (
     <div className="fixed top-0 w-full z-50">
       {/* Top Info Bar */}
-      <div className={`bg-primary text-white transition-all duration-300 ${isScrolled ? 'hidden' : 'block'}`}>
+      <div className={`text-white transition-all duration-300 ${isScrolled ? 'hidden' : 'block'}`} style={{ background: 'hsl(180,76%,15%)' }}>
         <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm gap-1 sm:gap-0">
           <div className="flex items-center gap-4">
-            <a href="mailto:starcomputeracademy@gmail.com" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
+            <a href="mailto:staracademydu78@gmail.com" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
               <Mail size={13} />
-              <span>starcomputeracademy@gmail.com</span>
+              <span>staracademydu78@gmail.com</span>
             </a>
             <span className="hidden md:flex items-center gap-1.5">
               <MapPin size={13} className="text-secondary" />
-              <span>X323+PRJ, Sarsaundi, UP 225001</span>
+              <span>X323+PRJ, Sarsaundi, Uttar Pradesh 225001</span>
             </span>
           </div>
-          <a href="tel:+919876543210" className="flex items-center gap-1.5 font-semibold hover:text-secondary transition-colors">
+          <a href="tel:+917275540378" className="flex items-center gap-1.5 font-semibold hover:text-secondary transition-colors">
             <Phone size={13} />
-            <span>+91 9876543210</span>
+            <span>+91 72755 40378</span>
           </a>
         </div>
       </div>
@@ -99,11 +101,15 @@ export function Navbar() {
       <nav className={`bg-white border-b border-border transition-all duration-300 ${isScrolled ? 'shadow-md py-2' : 'py-3'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center gap-3 group">
-              <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Star Academy" className="h-11 w-11 object-contain" />
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <img
+                src={`${import.meta.env.BASE_URL}images/logo.jpg`}
+                alt="Star Computer's Academy"
+                className="h-12 w-12 object-contain"
+              />
               <div>
-                <span className="font-bold text-xl text-primary block leading-tight tracking-tight" style={{fontFamily:'Inter,sans-serif'}}>Star Computer's</span>
-                <span className="font-semibold text-sm text-secondary block leading-tight tracking-wide">Academy</span>
+                <span className="font-extrabold text-lg text-primary block leading-tight">Star Computer's Academy</span>
+                <span className="text-xs font-medium text-muted-foreground block leading-tight tracking-wide">Excellence in Computer Education</span>
               </div>
             </Link>
 

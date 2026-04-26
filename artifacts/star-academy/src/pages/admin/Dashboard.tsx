@@ -6,6 +6,7 @@ import {
   PieChart, Pie, Cell, Legend, AreaChart, Area
 } from 'recharts';
 import { Users, UserCheck, Clock, BookOpen, MessageSquare, Star, TrendingUp, ArrowUpRight } from 'lucide-react';
+import { asArray } from '@/lib/utils';
 
 const TEAL = 'hsl(180,76%,22%)';
 const AMBER = 'hsl(28,75%,52%)';
@@ -18,8 +19,10 @@ const PIE_COLORS = [AMBER, TEAL, RED, PURPLE, BLUE, GREEN];
 
 export default function AdminDashboard() {
   const { data: stats, isLoading: statsLoading } = useGetAdminStats();
-  const { data: enrollments = [] } = useListEnrollments();
-  const { data: courses = [] } = useListCourses();
+  const { data: enrollmentsData = [] } = useListEnrollments();
+  const { data: coursesData = [] } = useListCourses();
+  const enrollments = asArray(enrollmentsData);
+  const courses = asArray(coursesData);
 
   // Enrollments by course (bar chart data)
   const courseEnrollmentData = courses.map(c => ({

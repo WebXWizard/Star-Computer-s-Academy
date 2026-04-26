@@ -52,3 +52,11 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Local environment and runtime logs
+.env
+*.log
+
+# Local notes
+STAR-ACADEMY.md
+VERCEL_BACKEND_DEPLOYMENT_GUIDE.md

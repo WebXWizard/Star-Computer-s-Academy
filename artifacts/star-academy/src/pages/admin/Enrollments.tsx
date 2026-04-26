@@ -7,9 +7,11 @@ import { Trash2, CheckCircle, XCircle, Clock, Search, Users } from 'lucide-react
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { asArray } from '@/lib/utils';
 
 export default function AdminEnrollments() {
-  const { data: enrollments = [], isLoading } = useListEnrollments();
+  const { data: enrollmentsData = [], isLoading } = useListEnrollments();
+  const enrollments = asArray(enrollmentsData);
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const [search, setSearch] = useState('');
