@@ -153,7 +153,7 @@ export default function Home() {
         >
           <motion.p
             variants={fadeUp}
-            className="mb-5 text-sm sm:text-base font-semibold text-primary"
+            className="mb-5 text-sm sm:text-base font-semibold text-md text-gray-800"
           >
             "Admission Open for 2026 - Enroll Now and Start Your Digital Journey!"
           </motion.p>
@@ -238,7 +238,7 @@ export default function Home() {
                 );
               })}
             </motion.div>
-            <motion.div variants={fadeUp} className="mt-8">
+            {/* <motion.div variants={fadeUp} className="mt-8">
               <h3 className="text-xl font-extrabold text-foreground mb-4">Facilities Gallery</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
@@ -255,7 +255,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </div>
       </section>
@@ -387,7 +387,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials removed from Home page as requested */}
+    
 
       <section className="star-animated-hero py-14" style={{ background: 'linear-gradient(135deg, hsl(180,76%,18%) 0%, hsl(180,76%,26%) 100%)' }}>
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
