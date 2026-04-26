@@ -153,7 +153,7 @@ export default function Home() {
         >
           <motion.p
             variants={fadeUp}
-            className="mb-5 text-sm sm:text-base font-semibold text-md text-gray-800"
+            className="mb-5 text-md sm:text-base font-bold text-primary"
           >
             "Admission Open for 2026 - Enroll Now and Start Your Digital Journey!"
           </motion.p>
@@ -238,24 +238,7 @@ export default function Home() {
                 );
               })}
             </motion.div>
-            {/* <motion.div variants={fadeUp} className="mt-8">
-              <h3 className="text-xl font-extrabold text-foreground mb-4">Facilities Gallery</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  'lab-computers.jpeg',
-                  'classroom-seating.jpeg',
-                  'academy-interior.jpeg',
-                ].map((img) => (
-                  <div key={img} className="bg-white rounded-xl overflow-hidden border border-border shadow-sm">
-                    <img
-                      src={`${import.meta.env.BASE_URL}images/facilities/${img}`}
-                      alt={img}
-                      className="w-full h-40 object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            </motion.div> */}
+          
           </motion.div>
         </div>
       </section>
