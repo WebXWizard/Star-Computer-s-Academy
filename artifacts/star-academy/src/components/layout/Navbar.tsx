@@ -161,10 +161,12 @@ export function Navbar() {
                             courses.map(c => <SelectItem key={c.id} value={c.title}>{c.title}</SelectItem>)
                           ) : (
                             <>
-                              <SelectItem value="Basic Computer Course">Basic Computer Course</SelectItem>
-                              <SelectItem value="MS Office Training">MS Office Training</SelectItem>
-                              <SelectItem value="CCC Preparation">CCC Preparation</SelectItem>
-                              <SelectItem value="Typing (Hindi/English)">Typing (Hindi/English)</SelectItem>
+                              <SelectItem value="Entry Level | Basic Courses for Beginners">Entry Level | Basic Courses for Beginners</SelectItem>
+                              <SelectItem value="Programming Courses for Absolute Beginners">Programming Courses for Absolute Beginners</SelectItem>
+                              <SelectItem value="Web Development Courses">Web Development Courses</SelectItem>
+                              <SelectItem value="NIELIT Offered Courses">NIELIT Offered Courses</SelectItem>
+                              <SelectItem value="Digital Marketing & Graphic Design Courses">Digital Marketing & Graphic Design Courses</SelectItem>
+                              <SelectItem value="Skill India Certification Courses">Skill India Certification Courses</SelectItem>
                             </>
                           )}
                         </SelectContent>

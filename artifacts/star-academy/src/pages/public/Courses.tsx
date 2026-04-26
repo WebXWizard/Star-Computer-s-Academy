@@ -45,15 +45,17 @@ const enrollmentSchema = z.object({
 type EnrollmentForm = z.infer<typeof enrollmentSchema>;
 
 const courseImages: Record<string, string> = {
-  "Basic Computer Course":
+  "Entry Level | Basic Courses for Beginners":
     "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=320&fit=crop",
-  "MS Word, Excel & PowerPoint":
-    "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=600&h=320&fit=crop",
-  "Typing Classes (Hindi & English)":
-    "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&h=320&fit=crop",
-  "CCC Preparation":
+  "Programming Courses for Absolute Beginners":
     "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=320&fit=crop",
-  "Internet & Email Training":
+  "Web Development Courses":
+    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=320&fit=crop",
+  "NIELIT Offered Courses":
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=320&fit=crop",
+  "Digital Marketing & Graphic Design Courses":
+    "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=320&fit=crop",
+  "Skill India Certification Courses":
     "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=320&fit=crop",
 };
 
@@ -61,69 +63,80 @@ const courseMeta: Record<
   string,
   { parts: string; summary: string; accent: string }
 > = {
-  "Basic Computer Course": {
+  "Entry Level | Basic Courses for Beginners": {
     parts: "2-4 Parts",
-    summary: "Computer fundamentals, Windows, files, internet basics, etc",
+    summary: "BCC, DCA, ADCA, PGDCA and other beginner courses",
     accent: "from-teal-500 to-cyan-500",
   },
-  "MS Word, Excel & PowerPoint": {
+  "Programming Courses for Absolute Beginners": {
     parts: "3 Parts",
-    summary: "Word, Excel, PowerPoint, charts, reports, presentations, etc",
+    summary: "Python, Java, JavaScript and coding fundamentals",
     accent: "from-blue-500 to-sky-500",
   },
-  "Typing Classes (Hindi & English)": {
-    parts: "2 Parts",
-    summary:
-      "Hindi typing, English typing, speed practice, govt exam prep, etc",
+  "Web Development Courses": {
+    parts: "4 Parts",
+    summary: "HTML, CSS, JS, Express, Node, React and projects",
     accent: "from-orange-500 to-amber-500",
   },
-  "CCC Preparation": {
-    parts: "4 Parts",
-    summary: "NIELIT CCC syllabus, MS Office, internet, mock tests, etc",
+  "NIELIT Offered Courses": {
+    parts: "2-4 Parts",
+    summary: "BCC, O'Level, CCC and other NIELIT certifications",
     accent: "from-emerald-500 to-teal-500",
   },
-  "Internet & Email Training": {
+  "Digital Marketing & Graphic Design Courses": {
     parts: "3 Parts",
-    summary: "Browsing, email, online forms, banking, digital safety, etc",
+    summary: "Marketing, SEO, Adobe tools, animation and design",
     accent: "from-violet-500 to-indigo-500",
+  },
+  "Skill India Certification Courses": {
+    parts: "4 Parts",
+    summary: "Data Entry, Angular and Python Fullstack certification paths",
+    accent: "from-rose-500 to-orange-500",
   },
 };
 
 const courseDetails: Record<string, string[]> = {
-  "Basic Computer Course": [
-    "Introduction to computers & operating systems",
-    "File management and folder organization",
-    "Hardware components and peripherals",
-    "Keyboard shortcuts & efficiency tips",
-    "Basic troubleshooting skills",
+  "Entry Level | Basic Courses for Beginners": [
+    "BCC, DCA, ADCA and PGDCA course paths",
+    "Computer fundamentals and operating systems",
+    "Office tools, typing and internet basics",
+    "Practical assignments for everyday computer use",
+    "Foundation skills for jobs and higher courses",
   ],
-  "MS Word, Excel & PowerPoint": [
-    "MS Word - formatting, tables, mail merge",
-    "MS Excel - formulas, charts, pivot tables",
-    "MS PowerPoint - professional presentations",
-    "Real-world projects and assignments",
-    "Tips for faster productivity",
+  "Programming Courses for Absolute Beginners": [
+    "Python, Java and JavaScript basics",
+    "Variables, conditions, loops and functions",
+    "Problem solving with simple programs",
+    "Beginner projects and guided practice",
+    "Foundation for fullstack development",
   ],
-  "Typing Classes (Hindi & English)": [
-    "Proper finger placement on keyboard",
-    "Hindi typing using Mangal/Krutidev font",
-    "English typing from 20 to 50+ WPM",
-    "Daily speed and accuracy practice",
-    "Preparation for govt typing exams",
+  "Web Development Courses": [
+    "HTML, CSS and responsive layouts",
+    "JavaScript for interactive websites",
+    "Express, Node and backend basics",
+    "React components and frontend projects",
+    "Portfolio-ready web development practice",
   ],
-  "CCC Preparation": [
-    "Complete NIELIT CCC syllabus coverage",
-    "Introduction to computers & OS",
-    "MS Office basics (Word, Excel, PPT)",
-    "Internet, email, and digital payments",
-    "Mock tests and previous year papers",
+  "NIELIT Offered Courses": [
+    "BCC, O'Level and CCC preparation",
+    "NIELIT syllabus-focused computer training",
+    "Office, internet and digital literacy topics",
+    "Practice sessions and exam-oriented revision",
+    "Certification guidance for students and job seekers",
   ],
-  "Internet & Email Training": [
-    "Safe and efficient internet browsing",
-    "Professional email writing and management",
-    "Online forms, transactions, and banking",
-    "Google Workspace tools (Docs, Drive)",
-    "Social media and online safety",
+  "Digital Marketing & Graphic Design Courses": [
+    "Digital marketing and SEO fundamentals",
+    "Social media campaign planning",
+    "Adobe design tools and creative workflows",
+    "Animation and visual content basics",
+    "Practical brand and promotion projects",
+  ],
+  "Skill India Certification Courses": [
+    "Data Entry certification-oriented training",
+    "Angular and Python Fullstack foundations",
+    "Job-ready practical assignments",
+    "Documentation and productivity skills",
+    "Certification support and guided practice",
   ],
 };
 

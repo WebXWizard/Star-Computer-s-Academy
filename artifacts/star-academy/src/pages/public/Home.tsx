@@ -18,11 +18,12 @@ const stagger = {
 };
 
 const courseImages: Record<string, string> = {
-  'Basic Computer Course': 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=220&fit=crop',
-  'MS Word, Excel & PowerPoint': 'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=400&h=220&fit=crop',
-  'Typing Classes (Hindi & English)': 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=220&fit=crop',
-  'CCC Preparation': 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=220&fit=crop',
-  'Internet & Email Training': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=220&fit=crop',
+  'Entry Level | Basic Courses for Beginners': 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=220&fit=crop',
+  'Programming Courses for Absolute Beginners': 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=220&fit=crop',
+  'Web Development Courses': 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=220&fit=crop',
+  'NIELIT Offered Courses': 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=220&fit=crop',
+  'Digital Marketing & Graphic Design Courses': 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=220&fit=crop',
+  'Skill India Certification Courses': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=220&fit=crop',
 };
 
 export default function Home() {
@@ -110,7 +111,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-white">
           {[
             { number: '500+', label: 'Students Taught' },
-            { number: '5+', label: 'Courses Available' },
+            { number: '6+', label: 'Courses Available' },
             { number: '3+', label: 'Years of Excellence' },
             { number: '100%', label: 'Practical Training' },
           ].map((stat) => (

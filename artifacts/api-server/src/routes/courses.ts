@@ -9,10 +9,74 @@ import {
 
 const router: IRouter = Router();
 
+const referenceCourses = [
+  {
+    title: "Entry Level | Basic Courses for Beginners",
+    description: "BCC, DCA, ADCA, PGDCA and other beginner-friendly computer courses.",
+    duration: "6-12 Months",
+    fee: "Contact for fee",
+    icon: "BookOpen",
+    isActive: true,
+  },
+  {
+    title: "Programming Courses for Absolute Beginners",
+    description: "Python, Java, JavaScript and beginner programming fundamentals.",
+    duration: "6-18 Months",
+    fee: "Contact for fee",
+    icon: "BookOpen",
+    isActive: true,
+  },
+  {
+    title: "Web Development Courses",
+    description: "HTML, CSS, JavaScript, Express, Node, React and practical web projects.",
+    duration: "3-12 Months",
+    fee: "Contact for fee",
+    icon: "BookOpen",
+    isActive: true,
+  },
+  {
+    title: "NIELIT Offered Courses",
+    description: "BCC, O'Level, CCC and other NIELIT-focused certification courses.",
+    duration: "6-12 Months",
+    fee: "Contact for fee",
+    icon: "BookOpen",
+    isActive: true,
+  },
+  {
+    title: "Digital Marketing & Graphic Design Courses",
+    description: "Marketing, SEO, Adobe tools, animation and creative digital skills.",
+    duration: "6-10 Months",
+    fee: "Contact for fee",
+    icon: "BookOpen",
+    isActive: true,
+  },
+  {
+    title: "Skill India Certification Courses",
+    description: "Data Entry, Angular and Python Fullstack certification-oriented training.",
+    duration: "3-6 Months",
+    fee: "Contact for fee",
+    icon: "BookOpen",
+    isActive: true,
+  },
+];
+
+async function listCoursesWithReferenceCatalog() {
+  const courses = await db.select().from(coursesTable).orderBy(coursesTable.id);
+  const existingTitles = new Set(courses.map((course) => course.title));
+  const missingCourses = referenceCourses.filter(
+    (course) => !existingTitles.has(course.title),
+  );
+
+  if (missingCourses.length === 0) return courses;
+
+  await db.insert(coursesTable).values(missingCourses);
+  return db.select().from(coursesTable).orderBy(coursesTable.id);
+}
+
 router.get("/", async (_req, res) => {
   try {
-    const courses = await db.select().from(coursesTable).orderBy(coursesTable.id);
-    res.json(
+    const courses = await listCoursesWithReferenceCatalog();
+    return res.json(
       courses.map((c) => ({
         ...c,
         createdAt: c.createdAt.toISOString(),
@@ -29,7 +93,7 @@ router.get("/", async (_req, res) => {
         })),
       );
     }
-    res.status(500).json({ error: "Failed to fetch courses" });
+    return res.status(500).json({ error: "Failed to fetch courses" });
   }
 });
 
@@ -43,7 +107,7 @@ router.post("/", async (req, res) => {
       .insert(coursesTable)
       .values({ title, description, duration, fee, icon: icon || null, isActive: isActive !== false })
       .returning();
-    res.status(201).json({ ...course, createdAt: course.createdAt.toISOString() });
+    return res.status(201).json({ ...course, createdAt: course.createdAt.toISOString() });
   } catch (err) {
     if (isDatabaseUnavailable(err)) {
       logFallbackMode("courses.post", err);
@@ -58,7 +122,7 @@ router.post("/", async (req, res) => {
       });
       return res.status(201).json({ ...course, createdAt: course.createdAt.toISOString() });
     }
-    res.status(500).json({ error: "Failed to create course" });
+    return res.status(500).json({ error: "Failed to create course" });
   }
 });
 
@@ -80,7 +144,7 @@ router.patch("/:id", async (req, res) => {
       .where(eq(coursesTable.id, id))
       .returning();
     if (!updated) return res.status(404).json({ error: "Course not found" });
-    res.json({ ...updated, createdAt: updated.createdAt.toISOString() });
+    return res.json({ ...updated, createdAt: updated.createdAt.toISOString() });
   } catch (err) {
     if (isDatabaseUnavailable(err)) {
       logFallbackMode("courses.patch", err);
@@ -97,7 +161,7 @@ router.patch("/:id", async (req, res) => {
       if (!updated) return res.status(404).json({ error: "Course not found" });
       return res.json({ ...updated, createdAt: updated.createdAt.toISOString() });
     }
-    res.status(500).json({ error: "Failed to update course" });
+    return res.status(500).json({ error: "Failed to update course" });
   }
 });
 
@@ -105,7 +169,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     await db.delete(coursesTable).where(eq(coursesTable.id, id));
-    res.json({ success: true, message: "Course deleted" });
+    return res.json({ success: true, message: "Course deleted" });
   } catch (err) {
     if (isDatabaseUnavailable(err)) {
       logFallbackMode("courses.delete", err);
@@ -113,7 +177,7 @@ router.delete("/:id", async (req, res) => {
       fallbackStore.deleteCourse(id);
       return res.json({ success: true, message: "Course deleted" });
     }
-    res.status(500).json({ error: "Failed to delete course" });
+    return res.status(500).json({ error: "Failed to delete course" });
   }
 });
 

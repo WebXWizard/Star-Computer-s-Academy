@@ -42,7 +42,7 @@ type TestimonialRecord = {
 };
 
 class FallbackStore {
-  private courseId = 6;
+  private courseId = 7;
   private enrollmentId = 1;
   private contactId = 1;
   private testimonialId = 4;
@@ -50,53 +50,63 @@ class FallbackStore {
   private courses: CourseRecord[] = [
     {
       id: 1,
-      title: "Basic Computer Course",
-      description: "Computer basics for beginners including file handling and internet usage.",
-      duration: "3 Months",
-      fee: "Rs 1200",
+      title: "Entry Level | Basic Courses for Beginners",
+      description: "BCC, DCA, ADCA, PGDCA and other beginner-friendly computer courses.",
+      duration: "6-12 Months",
+      fee: "Contact for fee",
       icon: "BookOpen",
       isActive: true,
       createdAt: new Date("2026-01-01T00:00:00.000Z"),
     },
     {
       id: 2,
-      title: "MS Word, Excel & PowerPoint",
-      description: "Practical office tools training for school, college and job use.",
-      duration: "3 Months",
-      fee: "Rs 1500",
+      title: "Programming Courses for Absolute Beginners",
+      description: "Python, Java, JavaScript and beginner programming fundamentals.",
+      duration: "6-18 Months",
+      fee: "Contact for fee",
       icon: "BookOpen",
       isActive: true,
       createdAt: new Date("2026-01-02T00:00:00.000Z"),
     },
     {
       id: 3,
-      title: "Typing Classes (Hindi & English)",
-      description: "Improve speed and accuracy for both Hindi and English typing.",
-      duration: "2 Months",
-      fee: "Rs 1000",
+      title: "Web Development Courses",
+      description: "HTML, CSS, JavaScript, Express, Node, React and practical web projects.",
+      duration: "3-12 Months",
+      fee: "Contact for fee",
       icon: "BookOpen",
       isActive: true,
       createdAt: new Date("2026-01-03T00:00:00.000Z"),
     },
     {
       id: 4,
-      title: "CCC Preparation",
-      description: "Complete CCC exam preparation with practical and mock practice.",
-      duration: "2 Months",
-      fee: "Rs 1300",
+      title: "NIELIT Offered Courses",
+      description: "BCC, O'Level, CCC and other NIELIT-focused certification courses.",
+      duration: "6-12 Months",
+      fee: "Contact for fee",
       icon: "BookOpen",
       isActive: true,
       createdAt: new Date("2026-01-04T00:00:00.000Z"),
     },
     {
       id: 5,
-      title: "Internet & Email Training",
-      description: "Learn safe browsing, email usage, online forms and digital tools.",
-      duration: "1 Month",
-      fee: "Rs 900",
+      title: "Digital Marketing & Graphic Design Courses",
+      description: "Marketing, SEO, Adobe tools, animation and creative digital skills.",
+      duration: "6-10 Months",
+      fee: "Contact for fee",
       icon: "BookOpen",
       isActive: true,
       createdAt: new Date("2026-01-05T00:00:00.000Z"),
+    },
+    {
+      id: 6,
+      title: "Skill India Certification Courses",
+      description: "Data Entry, Angular and Python Fullstack certification-oriented training.",
+      duration: "3-6 Months",
+      fee: "Contact for fee",
+      icon: "BookOpen",
+      isActive: true,
+      createdAt: new Date("2026-01-06T00:00:00.000Z"),
     },
   ];
 
