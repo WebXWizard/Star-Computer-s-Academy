@@ -7,9 +7,14 @@ out-tsc
 *.tsbuildinfo
 .expo
 .expo-shared
+replit.md
 
 # dependencies
 node_modules
+
+# Local media and spreadsheet assets
+/Images/
+/Excel/
 
 # IDEs and editors
 /.idea
