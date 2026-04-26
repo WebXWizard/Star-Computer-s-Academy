@@ -116,19 +116,21 @@ export function Navbar() {
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-6">
               <div className="flex gap-1">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={`px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200 ${
-                      isActive(link.href)
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-slate-600 hover:text-primary hover:bg-primary/5'
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                {navLinks
+                  .filter((link) => !(link.name === 'Testimonials' && location === '/'))
+                  .map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className={`px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200 ${
+                        isActive(link.href)
+                          ? 'bg-primary/10 text-primary'
+                          : 'text-slate-600 hover:text-primary hover:bg-primary/5'
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
               </div>
 
               <Dialog open={modalOpen} onOpenChange={setModalOpen}>
@@ -192,19 +194,21 @@ export function Navbar() {
         {/* Mobile Nav */}
         {mobileMenuOpen && (
           <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t py-3 px-4 flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`text-sm font-semibold p-2.5 rounded-md transition-colors ${
-                  isActive(link.href)
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-slate-700 hover:text-primary hover:bg-primary/5'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks
+              .filter((link) => !(link.name === 'Testimonials' && location === '/'))
+              .map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-sm font-semibold p-2.5 rounded-md transition-colors ${
+                    isActive(link.href)
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-slate-700 hover:text-primary hover:bg-primary/5'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
             <Button
               className="w-full mt-2 bg-secondary hover:bg-secondary/90 text-white font-semibold"
               onClick={() => { setMobileMenuOpen(false); setModalOpen(true); }}

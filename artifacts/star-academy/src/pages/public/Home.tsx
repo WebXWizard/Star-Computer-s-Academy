@@ -19,7 +19,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { useListCourses, useListTestimonials } from '@workspace/api-client-react';
+import { useListCourses } from '@workspace/api-client-react';
 import { asArray } from '@/lib/utils';
 
 const fadeUp = {
@@ -127,9 +127,7 @@ const teamMessages = [
 
 export default function Home() {
   const { data: coursesData = [] } = useListCourses();
-  const { data: testimonialsData = [] } = useListTestimonials();
   const courses = asArray(coursesData);
-  const testimonials = asArray(testimonialsData);
   const certifiedCourses = courses.length > 0 ? courses.slice(0, 3) : [];
 
   return (
@@ -155,9 +153,9 @@ export default function Home() {
         >
           <motion.p
             variants={fadeUp}
-            className="mb-5 text-sm sm:text-base font-semibold text-secondary"
+            className="mb-5 text-sm sm:text-base font-semibold text-primary"
           >
-            "Har Skill Par Nayi Shuruaat"
+            "Admission Open for 2026 - Enroll Now and Start Your Digital Journey!"
           </motion.p>
           <motion.h1
             variants={fadeUp}
@@ -239,6 +237,24 @@ export default function Home() {
                   </motion.div>
                 );
               })}
+            </motion.div>
+            <motion.div variants={fadeUp} className="mt-8">
+              <h3 className="text-xl font-extrabold text-foreground mb-4">Facilities Gallery</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  'lab-computers.jpeg',
+                  'classroom-seating.jpeg',
+                  'academy-interior.jpeg',
+                ].map((img) => (
+                  <div key={img} className="bg-white rounded-xl overflow-hidden border border-border shadow-sm">
+                    <img
+                      src={`${import.meta.env.BASE_URL}images/facilities/${img}`}
+                      alt={img}
+                      className="w-full h-40 object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -371,37 +387,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 bg-background">
-        <div className="max-w-6xl mx-auto px-4">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className="text-center mb-10">
-              <h2 className="text-3xl font-extrabold text-foreground mb-3">
-                Our Happy Students Say About Us
-              </h2>
-            </motion.div>
-            <motion.div variants={stagger} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {(testimonials.length > 0 ? testimonials.slice(0, 3) : []).map((t) => (
-                <motion.div key={t.id} variants={fadeUp}>
-                  <div className="bg-white rounded-xl border border-border p-6 shadow-sm h-full flex flex-col">
-                    <div className="flex gap-1 mb-3">
-                      {Array.from({ length: t.rating }).map((_, i) => (
-                        <Star key={i} size={15} className="text-secondary fill-secondary" />
-                      ))}
-                    </div>
-                    <p className="text-sm text-muted-foreground italic leading-relaxed flex-1">
-                      "{t.review}"
-                    </p>
-                    <div className="pt-4 mt-4 border-t border-border">
-                      <p className="font-extrabold text-foreground">{t.studentName}</p>
-                      <p className="text-xs text-primary font-bold mt-1">{t.course}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Testimonials removed from Home page as requested */}
 
       <section className="star-animated-hero py-14" style={{ background: 'linear-gradient(135deg, hsl(180,76%,18%) 0%, hsl(180,76%,26%) 100%)' }}>
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
